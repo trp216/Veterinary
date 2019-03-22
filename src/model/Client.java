@@ -62,11 +62,27 @@ public class Client {
 		this.phone = phone;
 	}
 	
-	public String addPetC(String n, double a, double w, char t) {
+	public void addPetC(String n, double a, double w, char t) {
 		Pet newPet = new Pet(n, a, w, t);
 		arrayPet.add(newPet);
-		String msg = "Pet added";
-		return msg;
+	}
+	
+	public void erasePetC(String n) {
+		boolean u = false;
+		for(int i = 0; i<arrayPet.size() || !u; i++) {
+			if(arrayPet.get(i).getNameP().equalsIgnoreCase(n)) {
+				arrayPet.remove(i);
+				u = true;
+			}
+		}
+	}
+
+	public ArrayList<Pet> getArrayPet() {
+		return arrayPet;
+	}
+
+	public void setArrayPet(ArrayList<Pet> arrayPet) {
+		this.arrayPet = arrayPet;
 	}
 
 	public String reportClient() {

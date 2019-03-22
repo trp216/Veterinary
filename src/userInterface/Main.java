@@ -12,7 +12,9 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-
+		Main objMain = new Main();
+		System.out.println("	Welcome to My Little Pet\n");
+		objMain.menu();
 	}
 	
 	public void menu() {
@@ -26,8 +28,8 @@ public class Main {
 			System.out.println("3- Show pet information\n");
 			System.out.println("4- Erase pet\n");
 			System.out.println("5- Change client's state\n");
-			System.out.println("6- Search pet");
-			System.out.println("7- Add a pet");
+			System.out.println("6- Add a pet\n");
+			System.out.println("7- Search Clinic History\n");
 			System.out.println("8- Exit");
 			int entry = x.nextInt();
 			switch(entry){
@@ -44,7 +46,7 @@ public class Main {
 					System.out.println(msg);
 					break;
 				case 4: 
-					msg = erasepet()
+					msg = erasePet();
 					System.out.println(msg);
 					break;
 				case 5:
@@ -52,11 +54,12 @@ public class Main {
 					System.out.println(msg);
 					break;
 				case 6:
-					msg = searchPetM();
-					System.out.println(msg);
+					addPetM();
+					break;
 				case 7:
-					msg = addPetM();
+					msg = showClinicHistoryM();
 					System.out.println(msg);
+					break;
 				case 8:
 					msg = "sib ntsib dua";
 					System.out.println(msg);
@@ -70,7 +73,19 @@ public class Main {
 		
 	}
 	
-	public String addPetM() {
+	public String showClinicHistoryM() {
+		Scanner show = new Scanner(System.in);
+		
+		System.out.println("Enter the id of the owner of the pet");
+		int id = show.nextInt();
+		System.out.println("Enter the name of the pet");
+		String np = show.next();
+		
+		String msg = theVeterinary.showClinicHistoryV(id, np);
+		return msg;
+	}
+	
+	public void addPetM() {
 		Scanner add = new Scanner(System.in);
 		System.out.println("Enter the name of the pet: ");
 		String nnp = add.next();
@@ -101,8 +116,7 @@ public class Main {
 
 		theVeterinary.addPetIfClientExists(nnp, anp, wnp, tnp, idnc);
 		
-		String msg = theVeterinary.addPetV(nnp, anp, wnp, tnp, nnc, idnc, dirnc, pnc, snc);
-		return msg;
+		theVeterinary.addPetV(nnp, anp, wnp, tnp, nnc, idnc, dirnc, pnc, snc);
 	}
 	
 	public String erasePet() {
@@ -134,7 +148,9 @@ public class Main {
 		
 		System.out.println("Enter the pet's name:");
 		String petNameSearch = searchPet.next();
-		String msg = theVeterinary.searchPetV(petNameSearch);
+		System.out.println("Enter the owner's id:");
+		int id = searchPet.nextInt();
+		String msg = theVeterinary.searchPetV(petNameSearch, id);
 		return msg;
 	}
 	

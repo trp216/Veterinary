@@ -14,6 +14,14 @@ public class ClinicHistory {
 		detailCH = d;
 	}
 	
+	public Detail getDetailCH() {
+		return detailCH;
+	}
+
+	public void setDetailCH(Detail detailCH) {
+		this.detailCH = detailCH;
+	}
+
 	public  Pet getPetCH() {
 		return clinicHistoryPet;
 	}
@@ -38,4 +46,8 @@ public class ClinicHistory {
 		this.id = id;
 	}
 
+	public String reportCH() {
+		String msg = getClientCH().reportClient() + "\n" + getPetCH().reportPet() + "\n" + getDetailCH();
+		return msg;
+	}
 }

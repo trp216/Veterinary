@@ -6,8 +6,10 @@ public class Drug {
 	private double dose;
 	private double frequency;
 	
-	public Drug() {
-		// TODO Auto-generated constructor stub
+	public Drug(String n, double d, double f) {
+		name = n;
+		dose = d;
+		frequency = f;
 	}
 
 	public String getName() {

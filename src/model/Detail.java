@@ -1,4 +1,5 @@
 package model;
+import java.util.ArrayList;
 
 public class Detail {
 	
@@ -10,6 +11,7 @@ public class Detail {
 	private char state;
 	
 	private Date consultDate;
+	private ArrayList <Drug> arrayDrug;
 	
 
 	public Detail(String s, String d, char st, Date cd) {
@@ -17,7 +19,18 @@ public class Detail {
 		diagnosis = d;
 		state = st;
 		consultDate = cd;
+		arrayDrug = new ArrayList <Drug>();
 		
+	}
+
+
+	public ArrayList<Drug> getArrayDrug() {
+		return arrayDrug;
+	}
+
+
+	public void setArrayDrug(ArrayList<Drug> arrayDrug) {
+		this.arrayDrug = arrayDrug;
 	}
 
 
