@@ -10,9 +10,19 @@ public class Vet {
 	
 	public Vet(String n) {
 		name = n;
+		Pet randomPet = new Pet("Pet", 5, 15.5, 'C');
 		arrayRoom = new Room [8];
+		Room randomRoom = new Room(2, randomPet);
+		arrayRoom[2] = randomRoom;
 		arrayClinicHistories = new ArrayList <ClinicHistory>();
 		arrayClient = new ArrayList <Client>();
+		Client randomClient = new Client("Client", 567, "Random direction", 238642);
+		arrayClient.add(randomClient);
+		randomClient.getArrayPet().add(randomPet);
+		Date randomDate = new Date(19, 3, 2018);
+		Detail randomDetail = new Detail("Random symptoms", "Random diagnosis", randomDate);
+		ClinicHistory randomCH = new ClinicHistory(randomPet, randomClient, randomDetail);
+		arrayClinicHistories.add(randomCH);
 	}
 
 	public String getNameV() {
@@ -23,7 +33,7 @@ public class Vet {
 		this.name = name;
 	}
 		
-	public void addPetV(String np2, double a2, double w2, char t2, String nc, int id2, String dir, int p, char s) {
+	public void addPetV(String np2, double a2, double w2, char t2, String nc, int id2, String dir, int p) {
 		
 		boolean l = false;
 		for(int i = 0;i<arrayClient.size() && !l ;i++) {
@@ -53,15 +63,15 @@ public class Vet {
 	}
 	
 	public String hospitalizationV(String n, int id) {
-		String msg = "No rooms available";
+		String msg = "Error";
 		boolean v = false;
 		
 		for(int j = 0; j<arrayClient.size(); j++)	{
 			if(arrayClient.get(j).getIDC() == id) {
 				for(int i = 0; i<arrayRoom.length && !v; i++) {
-					if(arrayClient.get(i).getArrayPet().get(i).getNameP().equalsIgnoreCase(n)) {
+					if(arrayClient.get(i).getPet(n) != null) {
 						if(!arrayRoom[i].stateR() == true) {
-							arrayRoom[i].setPetX(arrayClient.get(i).getArrayPet().get(i)); 
+							arrayRoom[i].setPetX(arrayClient.get(i).getPet(n)); 
 							v = true;
 							msg = "The pet has been assigned to a room ";
 						}
@@ -72,7 +82,7 @@ public class Vet {
 		return msg;
 	}
 	
-	public String hospitalizationCost(Date en, Date ex, String n, int id) {
+	public String hospitalizationCost(Date en, Date ex, String n, int id, Drug drug) {
 		boolean f = false;
 		String msg = "";
 		for(int j = 0; j<arrayClient.size(); j++)	{
@@ -81,7 +91,7 @@ public class Vet {
 					if(arrayClient.get(a).getArrayPet().get(a).getNameP().equalsIgnoreCase(n)) {
 						for(int i = 0; i<arrayRoom.length && !f; i++) {
 							if(arrayRoom[i].getPetX().getNameP().equalsIgnoreCase(n)) {
-								msg = arrayRoom[i].hospitalizationCostR(en, ex);
+								msg = arrayRoom[i].hospitalizationCostR(en, ex) + " plus the cost of prescription medication, which is " + drug.drugCost();
 								f = true;
 							}
 						}
@@ -110,10 +120,7 @@ public class Vet {
 		boolean z = false;
 		for(int i = 0; i<arrayClient.size() && !z; i++) {
 			if(arrayClient.get(i).getIDC() == id){
-				if(arrayClient.get(i).getArrayPet().get(i).getNameP().equalsIgnoreCase(n)) {
-					msg = arrayClient.get(i).getArrayPet().get(i).reportPet();
-					z = true;
-				}
+				msg = arrayClient.get(i).searchPetC(n);
 			}
 		}
 		return msg;
@@ -132,23 +139,23 @@ public class Vet {
 	}
 	
 	public String newClinicHistoryV(Pet p, Detail d, String n, int id, String dir, int ph) {
-		String msg = "";
+		String msg = "Error";
 		Client clientCH = new Client(n, id, dir, ph);
 		boolean x = false;
 		for(int i = 0;i<arrayClinicHistories.size() && !x;i++){
 			if(clientCH.getIDC() != (arrayClinicHistories.get(i).getClientCH().getIDC())) {
 				arrayClinicHistories.add(new ClinicHistory(p, clientCH, d));
 				arrayClient.add(clientCH);
+				msg = "Clinic History added";
 				x = true;
 			}
 			else if(clientCH.getIDC() == (arrayClinicHistories.get(i).getClientCH().getIDC())) {
 				if(p.getNameP() != (arrayClinicHistories.get(i).getPetCH().getNameP())) {
-					arrayClinicHistories.add(new ClinicHistory(p, clientCH, d));
+					arrayClinicHistories.add(new ClinicHistory(p, clientCH, d));	
 					arrayClient.add(clientCH);
-				x = true;
+					msg = "Clinic history added";
+					x = true;
 				}
-				else
-					msg = "The clinic history for this pet already exists";
 			}
 		}
 		return msg;

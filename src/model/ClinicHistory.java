@@ -1,7 +1,7 @@
 package model;
 
 public class ClinicHistory {
-	
+
 	private String id;
 	
 	private Pet clinicHistoryPet;
@@ -47,7 +47,7 @@ public class ClinicHistory {
 	}
 
 	public String reportCH() {
-		String msg = getClientCH().reportClient() + "\n" + getPetCH().reportPet() + "\n" + getDetailCH();
+		String msg = getClientCH().reportClient() + "\n" + getPetCH().reportPet() + "\n" + getDetailCH().showDetail();
 		return msg;
 	}
 }

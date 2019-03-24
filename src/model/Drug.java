@@ -4,19 +4,21 @@ public class Drug {
 
 	private String name;
 	private double dose;
+	private double doseCost;
 	private double frequency;
 	
-	public Drug(String n, double d, double f) {
+	public Drug(String n, double d, double f, double dc) {
 		name = n;
 		dose = d;
 		frequency = f;
+		doseCost = dc;
 	}
 
-	public String getName() {
+	public String getNameD() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setNameD(String name) {
 		this.name = name;
 	}
 
@@ -28,6 +30,14 @@ public class Drug {
 		this.dose = dose;
 	}
 
+	public double getDoseCost() {
+		return doseCost;
+	}
+	
+	public void setDoseCost(double doseCost) {
+		this.doseCost = doseCost;
+	}
+	
 	public double getFrequency() {
 		return frequency;
 	}
@@ -36,4 +46,8 @@ public class Drug {
 		this.frequency = frequency;
 	}
 
+	public double drugCost() {
+		double d = getDoseCost() * getFrequency();
+		return d;
+	}
 }

@@ -86,16 +86,38 @@ public class Client {
 	}
 
 	public String reportClient() {
-		String msg = getNameC() + ", id: " + getIDC() + ", phone: " + getPhoneC() + ", direction: " + getDirC();
+		String msg = getNameC() + ", id: " + getIDC() + ", phone: " + getPhoneC() + ", direction: " + getDirC() + ", state: " + getStateC();
 		return msg;
 	}
-
-	public char getState() {
-		return state;
+	
+	public String searchPetC(String n) {
+		String msg = "";
+		boolean y = false;
+		for(int i = 0; i<arrayPet.size() && !y; i++) {
+		if(arrayPet.get(i).getNameP().equalsIgnoreCase(n)) {
+			msg = arrayPet.get(i).reportPet();
+			y = true;
+		}
+		}
+		return msg;
 	}
-
-	public void setState(char state) {
-		this.state = state;
+	
+	public boolean trueName(String n) { 
+		boolean v = false;
+		for(int i = 0; i<arrayPet.size(); i++) {
+			if(arrayPet.get(i).getNameP().equalsIgnoreCase(n))
+				v = true;
+		}
+		return v;
 	}
-
+	
+	public Pet getPet(String n) {//method that evaluates if a pet with the given name exists in the array of pet's of this client.
+		Pet x = null;
+		for(int i = 0; i<arrayPet.size(); i++) {
+			Pet aux = (Pet)arrayPet.get(i);
+			if(aux.getNameP().equalsIgnoreCase(n))
+				x = aux;
+		}
+	return x;
+	}
 }

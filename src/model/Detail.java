@@ -11,26 +11,14 @@ public class Detail {
 	private char state;
 	
 	private Date consultDate;
-	private ArrayList <Drug> arrayDrug;
 	
 
-	public Detail(String s, String d, char st, Date cd) {
+	public Detail(String s, String d, Date cd) {
 		symptoms = s;
 		diagnosis = d;
-		state = st;
+		state = OPEN;
 		consultDate = cd;
-		arrayDrug = new ArrayList <Drug>();
 		
-	}
-
-
-	public ArrayList<Drug> getArrayDrug() {
-		return arrayDrug;
-	}
-
-
-	public void setArrayDrug(ArrayList<Drug> arrayDrug) {
-		this.arrayDrug = arrayDrug;
 	}
 
 
@@ -73,4 +61,8 @@ public class Detail {
 		this.consultDate = consultDate;
 	}
 
+	public String showDetail() {
+		String msg = "Symptoms: " + getSymptoms() + ", Diagnosis: " + getDiagnosis() + ", state: " + getStateCH();
+		return msg;
+	}
 }

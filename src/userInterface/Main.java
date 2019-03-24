@@ -30,7 +30,8 @@ public class Main {
 			System.out.println("5- Change client's state\n");
 			System.out.println("6- Add a pet\n");
 			System.out.println("7- Search Clinic History\n");
-			System.out.println("8- Exit");
+			System.out.println("8- Hospitalize a pet\n");
+			System.out.println("9- Exit");
 			int entry = x.nextInt();
 			switch(entry){
 				case 1: 
@@ -61,6 +62,10 @@ public class Main {
 					System.out.println(msg);
 					break;
 				case 8:
+					msg = newHospitalizationM();
+					System.out.println(msg);
+					break;
+				case 9:
 					msg = "sib ntsib dua";
 					System.out.println(msg);
 					end = false;
@@ -111,10 +116,7 @@ public class Main {
 		System.out.println("Enter the phone of the owner:");
 		int pnc = add.nextInt();
 		
-		System.out.println("Is the client active (A) or inactive (I)");
-		char snc = add.next().charAt(0);
-		
-		theVeterinary.addPetV(nnp, anp, wnp, tnp, nnc, idnc, dirnc, pnc, snc);
+		theVeterinary.addPetV(nnp, anp, wnp, tnp, nnc, idnc, dirnc, pnc);
 	}
 	
 	public String erasePet() {
@@ -135,7 +137,7 @@ public class Main {
 		System.out.println("Enter the id of the client whose state you want to consult");
 		int idCS = state.nextInt();
 		System.out.println(theVeterinary.searchClientV(idCS));
-		System.out.println("Change state of client to (A for active; I for inactive: ");
+		System.out.println("Change state of client to (A for active; I for inactive): ");
 		char stateChange = state.next().charAt(0);
 		String msg = theVeterinary.changeStateCV(idCS, stateChange);
 		return msg;
@@ -162,7 +164,8 @@ public class Main {
 	
 	public String newHospitalizationM() {
 		Scanner newPetH = new Scanner(System.in);
-		Scanner newRoomNumber = new Scanner(System.in);		
+		Scanner newRoomNumber = new Scanner(System.in);	
+		Scanner drug = new Scanner(System.in);
 		System.out.println("	Hospitalize a pet");
 		
 		System.out.println("Enter the name of the pet: ");
@@ -189,17 +192,29 @@ public class Main {
 		System.out.println("Enter the year of exit of the pet: ");
 		int yearNPHE = newPetH.nextInt();
 	
+		System.out.println("Enter the name of the prescription medication:");
+		String med = drug.next();
+		
+		System.out.println("Enter the dose of the prescription medication:");
+		double ds = drug.nextDouble();
+		
+		System.out.println("Enter the cost per dose:");
+		double cs = drug.nextDouble();
+		
+		System.out.println("Enter the frequency of the prescription medication:");
+		double fre = drug.nextDouble();
 		
 		Date registerDatePetH = new Date(dayNPH, monthNPH, yearNPH);
 		Date exitDatePet = new Date(dayNPHE, monthNPHE, yearNPHE);
 		
+		Drug newDrug = new Drug(med, ds, fre, cs);
 		
 		String msg = theVeterinary.hospitalizationV(nameNPH, idNPH);
 		
-		System.out.println("Do you want to know the hospitalization cost? (1 for yes, 2 for no");
+		System.out.println("Do you want to know the hospitalization cost? (1 for yes, 2 for no)");
 		int answer = newPetH.nextInt();
 		if(answer == 1) 
-			msg = msg + theVeterinary.hospitalizationCost(registerDatePetH, exitDatePet, nameNPH, idNPH);
+			msg = msg + theVeterinary.hospitalizationCost(registerDatePetH, exitDatePet, nameNPH, idNPH, newDrug);
 		
 		
 		return msg;
@@ -250,16 +265,13 @@ public class Main {
 		System.out.println("Enter the phone of the owner:");
 		int phoneNC = newClient.nextInt();
 		
-		System.out.println("Enter the state of the clinic history (O for open, C for closed):");
-		char stateNCH = newHistory.next().charAt(0);
-		
 		System.out.println("Enter the symptoms of the pet:");
 		String symNP = newHistory.next();
 		
 		System.out.println("Enter the diagnosis of the pet:");
 		String diaNP = newHistory.next();
 		
-		Detail petDetailCH = new Detail(symNP, diaNP, stateNCH, registerDatePet);
+		Detail petDetailCH = new Detail(symNP, diaNP, registerDatePet);
 		
 		String message = theVeterinary.newClinicHistoryV(petAddClinicHistory, petDetailCH, nameNC, idNC, dirNC, phoneNC);
 		return message;
