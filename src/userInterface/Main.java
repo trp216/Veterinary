@@ -113,8 +113,6 @@ public class Main {
 		
 		System.out.println("Is the client active (A) or inactive (I)");
 		char snc = add.next().charAt(0);
-
-		theVeterinary.addPetIfClientExists(nnp, anp, wnp, tnp, idnc);
 		
 		theVeterinary.addPetV(nnp, anp, wnp, tnp, nnc, idnc, dirnc, pnc, snc);
 	}
@@ -170,14 +168,8 @@ public class Main {
 		System.out.println("Enter the name of the pet: ");
 		String nameNPH = newPetH.next();
 		
-		System.out.println("Enter the age of the pet:");
-		double ageNPH = newPetH.nextDouble();
-		
-		System.out.println("Enter the weight of the pet: ");
-		double weightNPH = newPetH.nextDouble();
-		
-		System.out.println("What kind of pet is it? (D for dog, C for cat, B for bird, O for other)");
-		char typeNPH = newPetH.next().charAt(0);
+		System.out.println("Enter the id of its owner");
+		int idNPH = newPetH.nextInt();
 		
 		System.out.println("Enter the day of entry of the pet: ");
 		int dayNPH = newPetH.nextInt();
@@ -188,12 +180,28 @@ public class Main {
 		System.out.println("Enter the year of entry of the pet: ");
 		int yearNPH = newPetH.nextInt();
 		
-		System.out.println("Enter the room in which you want to hospitalize the pet:");
-		int newRoom = newRoomNumber.nextInt();
+		System.out.println("Enter the day of exit of the pet: ");
+		int dayNPHE = newPetH.nextInt();
+		
+		System.out.println("Enter the month of exit of the pet: ");
+		int monthNPHE = newPetH.nextInt();
+		
+		System.out.println("Enter the year of exit of the pet: ");
+		int yearNPHE = newPetH.nextInt();
+	
 		
 		Date registerDatePetH = new Date(dayNPH, monthNPH, yearNPH);
+		Date exitDatePet = new Date(dayNPHE, monthNPHE, yearNPHE);
 		
-		String msg = theVeterinary.hospitalizationV(newRoom, nameNPH, ageNPH, weightNPH, typeNPH);
+		
+		String msg = theVeterinary.hospitalizationV(nameNPH, idNPH);
+		
+		System.out.println("Do you want to know the hospitalization cost? (1 for yes, 2 for no");
+		int answer = newPetH.nextInt();
+		if(answer == 1) 
+			msg = msg + theVeterinary.hospitalizationCost(registerDatePetH, exitDatePet, nameNPH, idNPH);
+		
+		
 		return msg;
 		
 	}
@@ -242,9 +250,6 @@ public class Main {
 		System.out.println("Enter the phone of the owner:");
 		int phoneNC = newClient.nextInt();
 		
-		System.out.println("Is the client active (A) or inactive (I)");
-		char stateNC = newClient.next().charAt(0);
-		
 		System.out.println("Enter the state of the clinic history (O for open, C for closed):");
 		char stateNCH = newHistory.next().charAt(0);
 		
@@ -256,7 +261,7 @@ public class Main {
 		
 		Detail petDetailCH = new Detail(symNP, diaNP, stateNCH, registerDatePet);
 		
-		String message = theVeterinary.newClinicHistoryV(petAddClinicHistory, petDetailCH, nameNC, idNC, dirNC, phoneNC, stateNC);
+		String message = theVeterinary.newClinicHistoryV(petAddClinicHistory, petDetailCH, nameNC, idNC, dirNC, phoneNC);
 		return message;
 	}
 }

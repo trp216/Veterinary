@@ -22,22 +22,20 @@ public class Vet {
 	public void setNamev(String name) {
 		this.name = name;
 	}
-
-	public boolean addPetIfClientExists(String np, double a, double w, char t, int id) {
-		boolean l = false;
-		for(int i = 0;i<arrayClient.size() && !l ;i++) {
-			if(arrayClient.get(i).getIDC() == id) {
-				arrayClient.get(i).addPetC(np, a, w, t);
-				l = true;
-			}
-			}
-		return l;
-	}
 		
 	public void addPetV(String np2, double a2, double w2, char t2, String nc, int id2, String dir, int p, char s) {
-		addPetIfClientExists(np2, a2, w2, t2, id2);
-		if(addPetIfClientExists(np2, a2, w2, t2, id2) == false) {
-			Client cs = new Client(nc, id2, dir, p, s);
+		
+		boolean l = false;
+		for(int i = 0;i<arrayClient.size() && !l ;i++) {
+			if(arrayClient.get(i).getIDC() == id2) {
+				arrayClient.get(i).addPetC(np2, a2, w2, t2);
+				l = true;
+			}
+		}
+			
+		
+		if(l == false) {
+			Client cs = new Client(nc, id2, dir, p);
 			cs.getArrayPet().add(new Pet(np2, a2, w2, t2));
 			arrayClient.add(cs);
 		}
@@ -54,17 +52,43 @@ public class Vet {
 		return msg;
 	}
 	
-	public String hospitalizationV(int nr, String n, double a, double w, char t) {
+	public String hospitalizationV(String n, int id) {
 		String msg = "No rooms available";
 		boolean v = false;
-		Pet np = new Pet(n, a , w, t);
-		for(int i = 0; i<arrayRoom.length && !v; i++) {
-			if(!arrayRoom[nr].stateR() == true) {
-				arrayRoom[nr].setPetX(np); 
-				v = true;
-				msg = "The pet has been assigned to the room " + nr;
+		
+		for(int j = 0; j<arrayClient.size(); j++)	{
+			if(arrayClient.get(j).getIDC() == id) {
+				for(int i = 0; i<arrayRoom.length && !v; i++) {
+					if(arrayClient.get(i).getArrayPet().get(i).getNameP().equalsIgnoreCase(n)) {
+						if(!arrayRoom[i].stateR() == true) {
+							arrayRoom[i].setPetX(arrayClient.get(i).getArrayPet().get(i)); 
+							v = true;
+							msg = "The pet has been assigned to a room ";
+						}
+					}
+				}
 			}
 		}
+		return msg;
+	}
+	
+	public String hospitalizationCost(Date en, Date ex, String n, int id) {
+		boolean f = false;
+		String msg = "";
+		for(int j = 0; j<arrayClient.size(); j++)	{
+			if(arrayClient.get(j).getIDC() == id ) {
+				for(int a = 0; a < arrayClient.get(a).getArrayPet().size() && !f; a++) {
+					if(arrayClient.get(a).getArrayPet().get(a).getNameP().equalsIgnoreCase(n)) {
+						for(int i = 0; i<arrayRoom.length && !f; i++) {
+							if(arrayRoom[i].getPetX().getNameP().equalsIgnoreCase(n)) {
+								msg = arrayRoom[i].hospitalizationCostR(en, ex);
+								f = true;
+							}
+						}
+					}
+				}
+			}
+		}	
 		return msg;
 	}
 	
@@ -107,9 +131,9 @@ public class Vet {
 		return msg;
 	}
 	
-	public String newClinicHistoryV(Pet p, Detail d, String n, int id, String dir, int ph, char s) {
+	public String newClinicHistoryV(Pet p, Detail d, String n, int id, String dir, int ph) {
 		String msg = "";
-		Client clientCH = new Client(n, id, dir, ph, s);
+		Client clientCH = new Client(n, id, dir, ph);
 		boolean x = false;
 		for(int i = 0;i<arrayClinicHistories.size() && !x;i++){
 			if(clientCH.getIDC() != (arrayClinicHistories.get(i).getClientCH().getIDC())) {

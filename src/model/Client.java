@@ -13,12 +13,12 @@ public class Client {
 	private char state;
 	private ArrayList <Pet> arrayPet;
 	
-	public Client(String n, int i, String d, int p, char s) {
+	public Client(String n, int i, String d, int p) {
 		name = n;
 		id = i;
 		dir = d;
 		phone = p;
-		state = s;
+		state = ACTIVE;
 		arrayPet = new ArrayList<Pet>();
 	}
 
