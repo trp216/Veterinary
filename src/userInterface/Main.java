@@ -31,7 +31,8 @@ public class Main {
 			System.out.println("6- Add a pet\n");
 			System.out.println("7- Search Clinic History\n");
 			System.out.println("8- Hospitalize a pet\n");
-			System.out.println("9- Exit");
+			System.out.println("9- Search disponibility of a room\n");
+			System.out.println("10- Exit");
 			int entry = x.nextInt();
 			switch(entry){
 				case 1: 
@@ -66,6 +67,10 @@ public class Main {
 					System.out.println(msg);
 					break;
 				case 9:
+					msg = busyRoom();
+					System.out.println(msg);
+					break;
+				case 10:
 					msg = "sib ntsib dua";
 					System.out.println(msg);
 					end = false;
@@ -272,6 +277,16 @@ public class Main {
 		Detail petDetailCH = new Detail(symNP, diaNP, registerDatePet);
 		
 		String message = theVeterinary.newClinicHistoryV(nameNP, ageNP, weightNP, typeNP, petDetailCH, nameNC, idNC, dirNC, phoneNC);
+		return message;
+	}
+	
+	public String busyRoom() {
+		Scanner busy = new Scanner(System.in);
+		
+		System.out.println("Enter the number of the room:");
+		int x = busy.nextInt();
+		
+		String message = theVeterinary.busyRoomV(x);
 		return message;
 	}
 }

@@ -176,4 +176,17 @@ public class Vet {
 		return msg;
 	}
 		
+	public String busyRoomV(int x) {
+		boolean u = false;
+		String msg = "Couldn't find room";
+		for(int i = 0; i<(arrayRoom.length-1); i++) {
+			if(arrayRoom[i].getNumber() == x) {
+				if(arrayRoom[i].getPetX() == null)
+					msg = "Room available";
+				else if(arrayRoom[i].getPetX() != null)
+					msg = "Room busy";
+			}
+		}
+		return msg;
+	}
 }
