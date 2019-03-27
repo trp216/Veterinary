@@ -3,17 +3,20 @@ import java.util.ArrayList;
 
 public class Detail {
 	
+	//constants
 	public final static char OPEN = 'O';	
 	public final static char CLOSED = 'C';
 
+	
+	//atributes
 	private String symptoms;
 	private String diagnosis;
 	private char state;
 	
-	private Date consultDate;
+	private Date consultDate; //relation with class Date
 	
-
-	public Detail(String s, String d, Date cd) {
+	//methods
+	public Detail(String s, String d, Date cd) { //builder method
 		symptoms = s;
 		diagnosis = d;
 		state = OPEN;
@@ -61,7 +64,7 @@ public class Detail {
 		this.consultDate = consultDate;
 	}
 
-	public String showDetail() {
+	public String showDetail() { //report method for Detail
 		String msg = "Symptoms: " + getSymptoms() + ", Diagnosis: " + getDiagnosis() + ", state: " + getStateCH();
 		return msg;
 	}

@@ -91,13 +91,13 @@ public class Client {
 	}
 	
 	public String searchPetC(String n) {
-		String msg = "";
+		String msg = "Couldn't find the pet";
 		boolean y = false;
 		for(int i = 0; i<arrayPet.size() && !y; i++) {
-		if(arrayPet.get(i).getNameP().equalsIgnoreCase(n)) {
-			msg = arrayPet.get(i).reportPet();
-			y = true;
-		}
+			if(arrayPet.get(i).getNameP().equalsIgnoreCase(n)) {
+				msg = arrayPet.get(i).reportPet();
+				y = true;
+			}
 		}
 		return msg;
 	}

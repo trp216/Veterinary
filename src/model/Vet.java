@@ -62,16 +62,16 @@ public class Vet {
 		return msg;
 	}
 	
-	public String hospitalizationV(String n, int id) {
+		public String hospitalizationV(String n, int id) {
 		String msg = "Error";
 		boolean v = false;
 		
 		for(int j = 0; j<arrayClient.size(); j++)	{
 			if(arrayClient.get(j).getIDC() == id) {
-				for(int i = 0; i<arrayRoom.length && !v; i++) {
-					if(arrayClient.get(i).getPet(n) != null) {
+				for(int i = 0; i<(arrayRoom.length-1) && !v; i++) {
+					if(arrayClient.get(j).getPet(n) != null) {
 						if(!arrayRoom[i].stateR() == true) {
-							arrayRoom[i].setPetX(arrayClient.get(i).getPet(n)); 
+							arrayRoom[i].setPetX(arrayClient.get(j).getPet(n)); 
 							v = true;
 							msg = "The pet has been assigned to a room ";
 						}
@@ -90,7 +90,6 @@ public class Vet {
 				for(int a = 0; a < arrayClient.get(a).getArrayPet().size() && !f; a++) {
 					if(arrayClient.get(a).getArrayPet().get(a).getNameP().equalsIgnoreCase(n)) {
 						for(int i = 0; i<arrayRoom.length && !f; i++) {
-							if(arrayRoom[i].getPetX().getNameP().equalsIgnoreCase(n)) {
 								msg = arrayRoom[i].hospitalizationCostR(en, ex) + " plus the cost of prescription medication, which is " + drug.drugCost();
 								f = true;
 							}
@@ -98,7 +97,6 @@ public class Vet {
 					}
 				}
 			}
-		}	
 		return msg;
 	}
 	
@@ -138,21 +136,24 @@ public class Vet {
 		return msg;
 	}
 	
-	public String newClinicHistoryV(Pet p, Detail d, String n, int id, String dir, int ph) {
+	public String newClinicHistoryV(String nameNP, double ageNP, double weightNP, char typeNP, Detail d, String n, int id, String dir, int ph) {
 		String msg = "Error";
 		Client clientCH = new Client(n, id, dir, ph);
+		Pet newPet = new Pet(nameNP, ageNP, weightNP, typeNP);
 		boolean x = false;
 		for(int i = 0;i<arrayClinicHistories.size() && !x;i++){
 			if(clientCH.getIDC() != (arrayClinicHistories.get(i).getClientCH().getIDC())) {
-				arrayClinicHistories.add(new ClinicHistory(p, clientCH, d));
+				arrayClinicHistories.add(new ClinicHistory(newPet, clientCH, d));
 				arrayClient.add(clientCH);
+				arrayClient.get(i).addPetC(nameNP, ageNP, weightNP, typeNP);
 				msg = "Clinic History added";
 				x = true;
 			}
 			else if(clientCH.getIDC() == (arrayClinicHistories.get(i).getClientCH().getIDC())) {
-				if(p.getNameP() != (arrayClinicHistories.get(i).getPetCH().getNameP())) {
-					arrayClinicHistories.add(new ClinicHistory(p, clientCH, d));	
+				if(newPet.getNameP() != (arrayClinicHistories.get(i).getPetCH().getNameP())) {
+					arrayClinicHistories.add(new ClinicHistory(newPet, clientCH, d));	
 					arrayClient.add(clientCH);
+					arrayClient.get(i).addPetC(nameNP, ageNP, weightNP, typeNP);
 					msg = "Clinic history added";
 					x = true;
 				}

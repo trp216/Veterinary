@@ -251,8 +251,6 @@ public class Main {
 		
 		Date registerDatePet = new Date(dayNP, monthNP, yearNP);
 		
-		Pet petAddClinicHistory = new Pet(nameNP, ageNP, weightNP, typeNP);
-		
 		System.out.println("Enter the name of the owner of the pet:");
 		String nameNC = newClient.next();
 		
@@ -273,7 +271,7 @@ public class Main {
 		
 		Detail petDetailCH = new Detail(symNP, diaNP, registerDatePet);
 		
-		String message = theVeterinary.newClinicHistoryV(petAddClinicHistory, petDetailCH, nameNC, idNC, dirNC, phoneNC);
+		String message = theVeterinary.newClinicHistoryV(nameNP, ageNP, weightNP, typeNP, petDetailCH, nameNC, idNC, dirNC, phoneNC);
 		return message;
 	}
 }

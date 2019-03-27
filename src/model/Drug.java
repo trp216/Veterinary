@@ -1,13 +1,15 @@
 package model;
 
-public class Drug {
+public class Drug { 
 
+	//atributes
 	private String name;
 	private double dose;
 	private double doseCost;
 	private double frequency;
 	
-	public Drug(String n, double d, double f, double dc) {
+	//methods
+	public Drug(String n, double d, double f, double dc) {//builder method
 		name = n;
 		dose = d;
 		frequency = f;
@@ -22,7 +24,7 @@ public class Drug {
 		this.name = name;
 	}
 
-	public double getDose() {
+	public double getDose() { //gets the quantity of dose
 		return dose;
 	}
 
@@ -30,7 +32,7 @@ public class Drug {
 		this.dose = dose;
 	}
 
-	public double getDoseCost() {
+	public double getDoseCost() {//gets the cost of the dose
 		return doseCost;
 	}
 	
@@ -46,7 +48,7 @@ public class Drug {
 		this.frequency = frequency;
 	}
 
-	public double drugCost() {
+	public double drugCost() { //calculates the cost of the drug
 		double d = getDoseCost() * getFrequency();
 		return d;
 	}
