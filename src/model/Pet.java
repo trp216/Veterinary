@@ -14,6 +14,15 @@ public class Pet {
 	
 	private ClinicHistory clinicHistoryPet;
 	
+	/**
+	 * Pet
+	 * Pet constructor
+	 * @param n name of the pet
+	 * @param a age of the pet
+	 * @param w weight of the pet
+	 * @param t pet type
+	 */
+	
 	public Pet(String n, double a, double w, char t) {
 		name = n;
 		age = a;

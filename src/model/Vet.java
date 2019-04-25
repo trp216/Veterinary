@@ -32,6 +32,22 @@ public class Vet {
 	public void setNamev(String name) {
 		this.name = name;
 	}
+	
+	/**
+	 * addPetV
+	 * Adds a pet
+	 * <b>pre:</b> arrayClient must exist. np2 and w2 must be higher than 0.
+	 * @param np2
+	 * @param a2
+	 * @param w2
+	 * @param t2
+	 * @param nc
+	 * @param id2
+	 * @param dir
+	 * @param p
+	 * @see Vet.Vet(String) constructor of vet class
+	 * @see Client.addPet method for adding a pet
+	 */
 		
 	public void addPetV(String np2, double a2, double w2, char t2, String nc, int id2, String dir, int p) {
 		
@@ -50,6 +66,16 @@ public class Vet {
 			arrayClient.add(cs);
 		}
 	}
+	
+	/**
+	 * erasePetV
+	 * Method that erases a pet
+	 * <b>pre:</b>arrayClient must exist. 
+	 * <b>post:</b>
+	 * @param nc id of the owner of the pet
+	 * @param np name of the pet
+	 * @return message confirming that the pet has been erased
+	 */
 	
 	public String erasePetV(int nc, String np) {
 		String msg = "";
