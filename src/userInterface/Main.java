@@ -109,6 +109,9 @@ public class Main {
 		System.out.println("What kind of pet is it? (D for dog, C for cat, B for bird, O for other)");
 		char tnp = add.next().charAt(0);
 		
+		System.out.println("Enter the height of the pet:");
+		double hnp = add.nextDouble();
+		
 		System.out.println("Enter the name of the owner of the pet:");
 		String nnc = add.next();
 		
@@ -121,7 +124,7 @@ public class Main {
 		System.out.println("Enter the phone of the owner:");
 		int pnc = add.nextInt();
 		
-		theVeterinary.addPetV(nnp, anp, wnp, tnp, nnc, idnc, dirnc, pnc);
+		theVeterinary.addPetV(nnp, anp, wnp, tnp, hnp, nnc, idnc, dirnc, pnc);
 	}
 	
 	public String erasePet() {
@@ -245,6 +248,9 @@ public class Main {
 		System.out.println("What kind of pet is it? (D for dog, C for cat, B for bird, O for other)");
 		char typeNP = newPet.next().charAt(0);
 		
+		System.out.println("Enter the height of the pet:");
+		double heightNP = newPet.nextDouble();
+		
 		System.out.println("Enter the day of entry of the pet: ");
 		int dayNP = newPet.nextInt();
 		
@@ -276,7 +282,7 @@ public class Main {
 		
 		Detail petDetailCH = new Detail(symNP, diaNP, registerDatePet);
 		
-		String message = theVeterinary.newClinicHistoryV(nameNP, ageNP, weightNP, typeNP, petDetailCH, nameNC, idNC, dirNC, phoneNC);
+		String message = theVeterinary.newClinicHistoryV(nameNP, ageNP, weightNP, typeNP, heightNP, petDetailCH, nameNC, idNC, dirNC, phoneNC);
 		return message;
 	}
 	

@@ -18,10 +18,10 @@ public class Drug {
 	 * Drug constructor
 	 * Creates an object drug
 	 * <b>post:</b> an object drug is created
-	 * @param n name 
-	 * @param d dose
-	 * @param f frequency
-	 * @param dc cost of the dose
+	 * @param n : name of the drug 
+	 * @param d : dose of the drug
+	 * @param f : frequency of the drug 
+	 * @param dc : cost of the dose of the drug
 	 */
 	
 	public Drug(String n, double d, double f, double dc) {//builder method
@@ -41,6 +41,12 @@ public class Drug {
 		return name;
 	}
 
+	/**
+	 * setNameD
+	 * changes the name for the new one entered by parameters
+	 * @param name : new name
+	 */
+	
 	public void setNameD(String name) {
 		this.name = name;
 	}
@@ -54,6 +60,12 @@ public class Drug {
 	public double getDose() { //gets the quantity of dose
 		return dose;
 	}
+	
+	/**
+	 * setDose
+	 * changes the dose of the drug for the new one entered by parameters
+	 * @param dose : new dose
+	 */
 
 	public void setDose(double dose) {
 		this.dose = dose;
@@ -71,7 +83,8 @@ public class Drug {
 	
 	/**
 	 * setDoseCost
-	 * changes the cost of the dose of the drug for the one entered by parameters
+	 * changes the cost of the dose of the drug for the new one entered by parameters
+	 * @param doseCost : cost of the dose
 	 */
 	
 	public void setDoseCost(double doseCost) {
@@ -90,7 +103,8 @@ public class Drug {
 
 	/**
 	 * setFrequency
-	 * changes the frequency of the drug for the one entered by parameters
+	 * changes the frequency of the drug for the new one entered by parameters
+	 * @param frequency : frequency of the drug
 	 */
 	
 	public void setFrequency(double frequency) {

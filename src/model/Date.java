@@ -15,9 +15,9 @@ public class Date {
 	 * Date constructor
 	 * Creates an object date
 	 * <b>post:</b> a date is created
-	 * @param d the day
-	 * @param m the month
-	 * @param y the hour
+	 * @param d : the day
+	 * @param m : the month
+	 * @param y : the hour
 	 */
 	
 	public Date(int d, int m, int y) {
@@ -38,7 +38,8 @@ public class Date {
 	
 	/**
 	 * setDay
-	 * changes the day for the one entered by parameters
+	 * changes the day for the new one entered by parameters
+	 * @param day: new day  
 	 */
 	
 	public void setDay(int day) {
@@ -57,7 +58,8 @@ public class Date {
 	
 	/**
 	 * setMonth
-	 * changes the month for the one entered by parameters
+	 * changes the month for the new one entered by parameters
+	 * @param month :  new month
 	 */
 	
 	public void setMonth(int month) {
@@ -76,7 +78,8 @@ public class Date {
 	
 	/**
 	 * setYear
-	 * changes the year for the one entered by parameters
+	 * changes the year for the new one entered by parameters
+	 * @param year : new year
 	 */
 	
 	public void setYear(int year) {

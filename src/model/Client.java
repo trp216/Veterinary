@@ -1,6 +1,12 @@
 package model;
 import java.util.ArrayList;
 
+/**
+ * class Client
+ * @author Alejandra Diaz
+ *
+ */
+
 public class Client {
 
 	public final static char ACTIVE = 'A';
@@ -13,6 +19,16 @@ public class Client {
 	private char state;
 	private ArrayList <Pet> arrayPet;
 	
+	/**
+	 * 
+	 * @param n : name
+	 * @param i : identification
+	 * @param d : direction
+	 * @param p : phone number
+	 * state of the client is setted to active
+	 * arrayPet arraylist of pets is initialized
+	 */
+	
 	public Client(String n, int i, String d, int p) {
 		name = n;
 		id = i;
@@ -22,48 +38,108 @@ public class Client {
 		arrayPet = new ArrayList<Pet>();
 	}
 
+	/**
+	 * getStateC
+	 * getStateC no-argument method returns attribute state
+	 * @return state
+	 */
+	
 	public char getStateC() {
 		return state;
 	}
+	
+	/**
+	 * setStateC
+	 * changes the state for the new one entered by parameters
+	 * @param state :  new state
+	 */
 	
 	public void setStateC(char state) {
 		this.state = state;
 	}
 	
+	/**
+	 * getNameC
+	 * getNameC no-argument method returns attribute name
+	 * @return name
+	 */
+	
 	public String getNameC() {
 		return name;
 	}
+	
+	/**
+	 * setNameC
+	 * changes the name for the new one entered by parameters
+	 * @param name :  new name
+	 */
 
 	public void setNameC(String name) {
 		this.name = name;
 	}
+	
+	/**
+	 * getIDC
+	 * getIDC no-argument method returns attribute id
+	 * @return id
+	 */
 
 	public int getIDC() {
 		return id;
 	}
+	
+	/**
+	 * setIDC
+	 * changes the identification for the new one entered by parameters
+	 * @param id :  new id
+	 */
 
 	public void setIDC(int id) {
 		this.id = id;
 	}
+	
+	/**
+	 * getDirC
+	 * getDirC no-argument method returns attribute dir
+	 * @return dir
+	 */
 
 	public String getDirC() {
 		return dir;
 	}
+	
+	/**
+	 * setDiagnosis
+	 * changes the direction for the new one entered by parameters
+	 * @param dir :  new direction
+	 */
 
 	public void setDirC(String dir) {
 		this.dir = dir;
 	}
+	
+	/**
+	 * getPhoneC
+	 * getPhoneC no-argument method returns attribute phone
+	 * @return phone
+	 */
 
 	public int getPhoneC() {
 		return phone;
 	}
+	
+	/**
+	 * setPhoneC
+	 * changes the phone number for the new one entered by parameters
+	 * @param phone :  new phone number
+	 */
 
 	public void setPhoneC(int phone) {
 		this.phone = phone;
 	}
 	
-	public void addPetC(String n, double a, double w, char t) {
-		Pet newPet = new Pet(n, a, w, t);
+	public void addPetC(String n, double a, double w, char t, double h) {
+		Pet newPet = new Pet(n, a, w, t, h);
 		arrayPet.add(newPet);
 	}
 	
@@ -76,14 +152,17 @@ public class Client {
 			}
 		}
 	}
+	
+	/**
+	 * getArrayPet
+	 * getArrayPet no-argument method returns arraylist of pets
+	 * @return arrayPet
+	 */
 
 	public ArrayList<Pet> getArrayPet() {
 		return arrayPet;
 	}
-
-	public void setArrayPet(ArrayList<Pet> arrayPet) {
-		this.arrayPet = arrayPet;
-	}
+	
 
 	public String reportClient() {
 		String msg = getNameC() + ", id: " + getIDC() + ", phone: " + getPhoneC() + ", direction: " + getDirC() + ", state: " + getStateC();

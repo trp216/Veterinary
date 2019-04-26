@@ -10,7 +10,7 @@ public class Vet {
 	
 	public Vet(String n) {
 		name = n;
-		Pet randomPet = new Pet("Pet", 5, 15.5, 'C');
+		Pet randomPet = new Pet("Pet", 5, 15.5, 'C', 25);
 		arrayRoom = new Room [8];
 		Room randomRoom = new Room(2, randomPet);
 		arrayRoom[2] = randomRoom;
@@ -37,24 +37,23 @@ public class Vet {
 	 * addPetV
 	 * Adds a pet
 	 * <b>pre:</b> arrayClient must exist. np2 and w2 must be higher than 0.
-	 * @param np2
-	 * @param a2
-	 * @param w2
-	 * @param t2
-	 * @param nc
-	 * @param id2
-	 * @param dir
-	 * @param p
-	 * @see Vet.Vet(String) constructor of vet class
-	 * @see Client.addPet method for adding a pet
+	 * @param np2 : name of the new pet
+	 * @param a2 : age of the new pet
+	 * @param w2 : weight of the new pet
+	 * @param t2 : type of the new pet
+	 * @param h2 : height of the new pet
+	 * @param nc : name of the owner of the pet
+	 * @param id2 : identification of the owner of the pet
+	 * @param dir : direction of the owner of the pet
+	 * @param p : phone number of the owner of the pet
 	 */
 		
-	public void addPetV(String np2, double a2, double w2, char t2, String nc, int id2, String dir, int p) {
+	public void addPetV(String np2, double a2, double w2, char t2, double h2, String nc, int id2, String dir, int p) {
 		
 		boolean l = false;
 		for(int i = 0;i<arrayClient.size() && !l ;i++) {
 			if(arrayClient.get(i).getIDC() == id2) {
-				arrayClient.get(i).addPetC(np2, a2, w2, t2);
+				arrayClient.get(i).addPetC(np2, a2, w2, t2, h2);
 				l = true;
 			}
 		}
@@ -62,7 +61,7 @@ public class Vet {
 		
 		if(l == false) {
 			Client cs = new Client(nc, id2, dir, p);
-			cs.getArrayPet().add(new Pet(np2, a2, w2, t2));
+			cs.getArrayPet().add(new Pet(np2, a2, w2, t2, h2));
 			arrayClient.add(cs);
 		}
 	}
@@ -162,16 +161,16 @@ public class Vet {
 		return msg;
 	}
 	
-	public String newClinicHistoryV(String nameNP, double ageNP, double weightNP, char typeNP, Detail d, String n, int id, String dir, int ph) {
+	public String newClinicHistoryV(String nameNP, double ageNP, double weightNP, char typeNP, double heightNP, Detail d, String n, int id, String dir, int ph) {
 		String msg = "Error";
 		Client clientCH = new Client(n, id, dir, ph);
-		Pet newPet = new Pet(nameNP, ageNP, weightNP, typeNP);
+		Pet newPet = new Pet(nameNP, ageNP, weightNP, typeNP, heightNP);
 		boolean x = false;
 		for(int i = 0;i<arrayClinicHistories.size() && !x;i++){
 			if(clientCH.getIDC() != (arrayClinicHistories.get(i).getClientCH().getIDC())) {
 				arrayClinicHistories.add(new ClinicHistory(newPet, clientCH, d));
 				arrayClient.add(clientCH);
-				arrayClient.get(i).addPetC(nameNP, ageNP, weightNP, typeNP);
+				arrayClient.get(i).addPetC(nameNP, ageNP, weightNP, typeNP, heightNP);
 				msg = "Clinic History added";
 				x = true;
 			}
@@ -179,7 +178,7 @@ public class Vet {
 				if(newPet.getNameP() != (arrayClinicHistories.get(i).getPetCH().getNameP())) {
 					arrayClinicHistories.add(new ClinicHistory(newPet, clientCH, d));	
 					arrayClient.add(clientCH);
-					arrayClient.get(i).addPetC(nameNP, ageNP, weightNP, typeNP);
+					arrayClient.get(i).addPetC(nameNP, ageNP, weightNP, typeNP, heightNP);
 					msg = "Clinic history added";
 					x = true;
 				}
