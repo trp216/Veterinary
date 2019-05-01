@@ -32,7 +32,8 @@ public class Main {
 			System.out.println("7- Search Clinic History\n");
 			System.out.println("8- Hospitalize a pet\n");
 			System.out.println("9- Search disponibility of a room\n");
-			System.out.println("10- Exit");
+			System.out.println("10- Update client information\n");
+			System.out.println("11- Exit");
 			int entry = x.nextInt();
 			switch(entry){
 				case 1: 
@@ -71,6 +72,10 @@ public class Main {
 					System.out.println(msg);
 					break;
 				case 10:
+					msg = updateClient();
+					System.out.println(msg);
+					break;
+				case 11:
 					msg = "sib ntsib dua";
 					System.out.println(msg);
 					end = false;
@@ -294,6 +299,21 @@ public class Main {
 		
 		String message = theVeterinary.busyRoomV(x);
 		return message;
+	}
+	
+	public String updateClient() {
+		Scanner update = new Scanner(System.in);
+		
+		System.out.println("Enter the id of the client");
+		int idc = update.nextInt();
+		
+		System.out.println("Enter the new phone number of the client");
+		int pnc = update.nextInt();
+		
+		System.out.println("Enter the new direction of the client");
+		String dirc = update.next();
+		String msg = theVeterinary.updateClientV(idc, pnc, dirc);
+		return msg;
 	}
 }
 	

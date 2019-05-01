@@ -70,9 +70,9 @@ public class Vet {
 	 * erasePetV
 	 * Method that erases a pet
 	 * <b>pre:</b>arrayClient must exist. 
-	 * <b>post:</b>
-	 * @param nc id of the owner of the pet
-	 * @param np name of the pet
+	 * <b>post:</b>the specified pet is deleted.
+	 * @param nc : id of the owner of the pet
+	 * @param np : name of the pet
 	 * @return message confirming that the pet has been erased
 	 */
 	
@@ -149,15 +149,35 @@ public class Vet {
 		return msg;
 	}
 	
-	public String searchClientV(int id) {
-		String msg = "Couldn't find the client";
+	/**
+	 * clientExists
+	 * This method searches if a client exists
+	 * <b>pre: </b> The array of clients must've been created
+	 * @param id : the id of the client
+	 * @return boolean variable
+	 */
+	public boolean clientExists(int id) {
 		boolean y = false;
-		for(int i  = 0; i<arrayClient.size() && !y; i++) {
-			if(arrayClient.get(i).getIDC() == id) {
-				msg = arrayClient.get(i).reportClient();
+		for(int i = 0; i<arrayClient.size() && !y; i++) {
+			if(arrayClient.get(i).getIDC()==id) 
 				y = true;
-			}
 		}
+		return y;
+	}
+	
+	/**
+	 * searchClientV
+	 * This method shows the information of a client
+	 * <b>pre: </b> The array of clients must've been created
+	 * @param id : the identification of the client
+	 * @return message showing all the information about the client
+	 */
+	public String searchClientV(int id) {
+		String msg = "";
+		for(int i = 0; i<arrayClient.size(); i++) {
+			if(clientExists(id)==true) 
+				msg = arrayClient.get(i).reportClient();
+		}	
 		return msg;
 	}
 	
@@ -200,18 +220,51 @@ public class Vet {
 		}
 		return msg;
 	}
-		
+	
+	/**
+	 * busyRoomV
+	 * <b>pre: </b>The array of rooms must've been created
+	 * This method searches if a room is occupied by a pet
+	 * @param x : number of the room
+	 * @return message confirming availability of the room
+
+	 */
 	public String busyRoomV(int x) {
 		boolean u = false;
 		String msg = "Couldn't find room";
-		for(int i = 0; i<(arrayRoom.length-1); i++) {
+		for(int i = 0; i<(arrayRoom.length-1) && !u; i++) {
 			if(arrayRoom[i].getNumber() == x) {
 				if(arrayRoom[i].getPetX() == null)
 					msg = "Room available";
 				else if(arrayRoom[i].getPetX() != null)
 					msg = "Room busy";
+				u = true;
 			}
 		}
 		return msg;
 	}
+
+	/**
+	*updateClientV 
+	*This method allows to update the basic data of a veterinary client, these data include, address and phone number.
+	*<b>pre: </b> The array of clients was created before.
+	*<b>post: </b> The address and /or phone number of the client is updated.
+	*@param id : The id of the client
+	*@param dir : The new address of the client. This param could be empty.
+	*@param p : The new phone number of the client. This param could be empty.
+	*@return message confirming that the information is updated
+	*/
+
+	public String updateClientV(int id, int p, String dir){
+		String msg = "";
+		for(int i = 0; i<arrayClient.size(); i++) {
+			if(clientExists(id)) {
+				arrayClient.get(i).setPhoneC(p);
+				arrayClient.get(i).setDirC(dir);
+				msg = "Information succesfully updated";
+			}
+		}
+		return msg;
+	}
+	
 }

@@ -26,7 +26,7 @@ public class Client {
 	 * @param d : direction
 	 * @param p : phone number
 	 * state of the client is setted to active
-	 * arrayPet arraylist of pets is initialized
+	 * arrayPet : arraylist of pets is initialized
 	 */
 	
 	public Client(String n, int i, String d, int p) {
@@ -109,7 +109,7 @@ public class Client {
 	}
 	
 	/**
-	 * setDiagnosis
+	 * setDirection
 	 * changes the direction for the new one entered by parameters
 	 * @param dir :  new direction
 	 */
@@ -163,11 +163,24 @@ public class Client {
 		return arrayPet;
 	}
 	
+	/**
+	 * reportClient
+	 * Method that shows a message with all the information about the client
+	 * @return message
+	 */
 
 	public String reportClient() {
 		String msg = getNameC() + ", id: " + getIDC() + ", phone: " + getPhoneC() + ", direction: " + getDirC() + ", state: " + getStateC();
 		return msg;
 	}
+	
+	/**
+	 * searchPetC
+	 * Checks the information about the pet
+	 * <b>pre:</b>Arraylist of pets must exist.
+	 * @param n : name of the pet
+	 * @return message with all the information of the pet
+	 */
 	
 	public String searchPetC(String n) {
 		String msg = "Couldn't find the pet";
@@ -189,6 +202,7 @@ public class Client {
 		}
 		return v;
 	}
+	
 	
 	public Pet getPet(String n) {//method that evaluates if a pet with the given name exists in the array of pet's of this client.
 		Pet x = null;

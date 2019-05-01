@@ -120,6 +120,12 @@ public class Detail {
 	public void setConsultDate(Date consultDate) {
 		this.consultDate = consultDate;
 	}
+	
+	/**
+	 * showDetail
+	 * Method that shows a message with all the details of the clinic history
+	 * @return message
+	 */
 
 	public String showDetail() { //report method for Detail
 		String msg = "Symptoms: " + getSymptoms() + ", Diagnosis: " + getDiagnosis() + ", state: " + getStateCH();
