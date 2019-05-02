@@ -35,7 +35,8 @@ public class Vet {
 		randomClient.getArrayPet().add(randomPet);
 		Date randomDate = new Date(19, 3, 2018);
 		Detail randomDetail = new Detail("Random symptoms", "Random diagnosis", randomDate);
-		ClinicHistory randomCH = new ClinicHistory(randomPet, randomClient, randomDetail);
+		ClinicHistory randomCH = new ClinicHistory(00, randomPet, randomClient);
+		randomCH.addDetailCH(randomDetail);
 		arrayClinicHistories.add(randomCH);
 	}
 
@@ -267,10 +268,17 @@ public class Vet {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * addSymptoms
+	 * This method adds new symptoms
+	 * @param id : identification number of the clinic history
+	 * @param s : new symptoms
 	 */
-	public boolean addSymptoms() {}
+	public void addSymptomsV(int id, String s) {
+		boolean h = false;
+		if(searchClinicHistory(id)!= null) {
+			searchClinicHistory(id).addSymptomsCH(s);
+		}
+	}
 	
 	/**
 	 * addDetailV
@@ -279,13 +287,13 @@ public class Vet {
 	 * @param s : symptoms
 	 * @param d : diagnosis
 	 * @param cd : consult date
-	 * @return
+	 * @return boolean variable
 	 */
 	public boolean addDetailV(int id, String s, String d, Date cd) {
 		Detail dt = new Detail(s,d,cd);
 		boolean x = false;
 		if(searchClinicHistory(id)!=null) {
-			searchClinicHistory(id).getDetailCH().add(dt);
+			searchClinicHistory(id).addDetailCH(dt);
 			x = true;
 		}
 		return x;
@@ -298,7 +306,7 @@ public class Vet {
 		boolean x = false;
 		for(int i = 0;i<arrayClinicHistories.size() && !x;i++){
 			if(clientCH.getIDC() != (arrayClinicHistories.get(i).getClientCH().getIDC())) {
-				arrayClinicHistories.add(new ClinicHistory(newPet, clientCH));
+				arrayClinicHistories.add(new ClinicHistory(idch, newPet, clientCH));
 				addDetailV(idch, symNP, diaNP, registerDatePet);
 				arrayClient.add(clientCH);
 				arrayClient.get(i).addPetC(nameNP, ageNP, weightNP, typeNP, heightNP);
@@ -307,7 +315,7 @@ public class Vet {
 			}
 			else if(clientCH.getIDC() == (arrayClinicHistories.get(i).getClientCH().getIDC())) {
 				if(newPet.getNameP() != (arrayClinicHistories.get(i).getPetCH().getNameP())) {
-					arrayClinicHistories.add(new ClinicHistory(newPet, clientCH));	
+					arrayClinicHistories.add(new ClinicHistory(id, newPet, clientCH));	
 					addDetailV(idch, symNP, diaNP, registerDatePet);
 					arrayClient.add(clientCH);
 					arrayClient.get(i).addPetC(nameNP, ageNP, weightNP, typeNP, heightNP);

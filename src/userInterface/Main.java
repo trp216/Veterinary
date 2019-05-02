@@ -33,7 +33,9 @@ public class Main {
 			System.out.println("8- Hospitalize a pet\n");
 			System.out.println("9- Search disponibility of a room\n");
 			System.out.println("10- Update client information\n");
-			System.out.println("11- Exit");
+			System.out.println("11- Add new details to a clinic history\n");
+			System.out.println("12- Add new symptoms to a clinic history\n");
+			System.out.println("13- Exit");
 			int entry = x.nextInt();
 			switch(entry){
 				case 1: 
@@ -76,7 +78,14 @@ public class Main {
 					System.out.println(msg);
 					break;
 				case 11:
-					msg = "sib ntsib dua";
+					msg = addDetailM();
+					System.out.println(msg);
+					break;
+				case 12:
+					addSymptomsM();
+					break;
+				case 13:
+					msg = "angalia hivi karibuni";
 					System.out.println(msg);
 					end = false;
 					break;
@@ -96,6 +105,51 @@ public class Main {
 		
 		String msg = theVeterinary.showClinicHistoryV(id);
 		return msg;
+	}
+	
+	public String addDetailM() {
+		Scanner d = new Scanner(System.in);
+		String msg = "";
+		
+		System.out.println("Enter the identification number of the clinic history");
+		int id = d.nextInt();
+		
+		System.out.println("Enter the symptoms of the pet");
+		String s = d.next();
+		
+		System.out.println("Enter the diagnosis");
+		String dg = d.next();
+		
+		System.out.println("Enter the day of the last consult");
+		int day = d.nextInt();
+		
+		System.out.println("Enter the month of the consult");
+		int month = d.nextInt();
+		
+		System.out.println("Enter the year of the consult");
+		int year = d.nextInt();
+		
+		Date cd = new Date(day, month, year);
+		
+		theVeterinary.addDetailV(id, s, dg, cd);
+		if(theVeterinary.addDetailV(id, s, dg, cd)==true)
+			msg = "New details succesfully added";
+		else
+			msg = "Error";
+		return msg;
+	}
+	
+	public void addSymptomsM() {
+		Scanner s = new Scanner(System.in);
+		String msg = "";
+		
+		System.out.println("Enter the identification number of the clinic history");
+		int id = s.nextInt();
+		
+		System.out.println("Enter the symptoms of the pet");
+		String sy = s.next();
+		
+		theVeterinary.addSymptomsV(id, sy);
 	}
 	
 	public void addPetM() {
