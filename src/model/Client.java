@@ -138,11 +138,28 @@ public class Client {
 		this.phone = phone;
 	}
 	
+	/**
+	 * addPetC
+	 * This method adds a new pet
+	 * <b>pre: </b>Arraylist of pets must've been created.
+	 * @param n : name of the pet
+	 * @param a : age of the pet
+	 * @param w : weight of the pet
+	 * @param t : type of pet
+	 * @param h : height of pet
+	 */
 	public void addPetC(String n, double a, double w, char t, double h) {
 		Pet newPet = new Pet(n, a, w, t, h);
 		arrayPet.add(newPet);
 	}
 	
+	/**
+	 * erasePetC
+	 * This method erases a pet
+	 * <b>pre: </b>Arraylist of pets must exist.
+	 * <b>post: </b>A pet is erased
+	 * @param n : name of the pet
+	 */
 	public void erasePetC(String n) {
 		boolean u = false;
 		for(int i = 0; i<arrayPet.size() || !u; i++) {
@@ -176,24 +193,27 @@ public class Client {
 	
 	/**
 	 * searchPetC
-	 * Checks the information about the pet
+	 * Shows information about a pet
 	 * <b>pre:</b>Arraylist of pets must exist.
 	 * @param n : name of the pet
 	 * @return message with all the information of the pet
 	 */
-	
 	public String searchPetC(String n) {
 		String msg = "Couldn't find the pet";
-		boolean y = false;
-		for(int i = 0; i<arrayPet.size() && !y; i++) {
-			if(arrayPet.get(i).getNameP().equalsIgnoreCase(n)) {
-				msg = arrayPet.get(i).reportPet();
-				y = true;
-			}
+		for(int i = 0; i<arrayPet.size(); i++) {
+			if(getPet(n)!=null) 
+				msg = getPet(n).reportPet();
 		}
 		return msg;
 	}
 	
+	/**
+	 * trueName
+	 * This method checks if a pet exists
+	 * <b>pre:</b>Arraylist of pets must exist.
+	 * @param n : name of the pet
+	 * @return boolean variable
+	 */
 	public boolean trueName(String n) { 
 		boolean v = false;
 		for(int i = 0; i<arrayPet.size(); i++) {
@@ -203,7 +223,13 @@ public class Client {
 		return v;
 	}
 	
-	
+	/**
+	 * getPet
+	 * This method checks if a pet exists
+	 * <b>pre:</b>Arraylist of pets must exist.
+	 * @param n : name of the pet
+	 * @return object pet
+	 */
 	public Pet getPet(String n) {//method that evaluates if a pet with the given name exists in the array of pet's of this client.
 		Pet x = null;
 		for(int i = 0; i<arrayPet.size(); i++) {

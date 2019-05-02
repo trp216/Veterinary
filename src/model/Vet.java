@@ -1,6 +1,12 @@
 package model;
 import java.util.ArrayList;
 
+/**
+ * class Vet
+ * @author Alejandra Diaz
+ *
+ */
+
 public class Vet {
 
 	private String name;
@@ -25,10 +31,20 @@ public class Vet {
 		arrayClinicHistories.add(randomCH);
 	}
 
+	/**
+	 * getNameV
+	 * getNameV no-argument method returns attribute name
+	 * @return name
+	 */
 	public String getNameV() {
 		return name;
 	}
 
+	/**
+	 * setNameV
+	 * changes the name for the new one entered by parameters
+	 * @param name :  new name
+	 */
 	public void setNamev(String name) {
 		this.name = name;
 	}
@@ -37,6 +53,7 @@ public class Vet {
 	 * addPetV
 	 * Adds a pet
 	 * <b>pre:</b> arrayClient must exist. np2 and w2 must be higher than 0.
+	 * <b>post: </b> A new pet is added.
 	 * @param np2 : name of the new pet
 	 * @param a2 : age of the new pet
 	 * @param w2 : weight of the new pet
@@ -138,12 +155,20 @@ public class Vet {
 		return msg;
 	}
 	
+	/**
+	 * searchPetV
+	 * Shows information about a pet
+	 * <b>pre:</b>Arraylist of pets must exist.
+	 * @param n : name of the pet
+	 * @param id : identification of the client
+	 * @return message with all the information of the pet
+	 */
 	public String searchPetV(String n, int id) {
 		String msg = "Couldn't find the pet";
 		boolean z = false;
 		for(int i = 0; i<arrayClient.size() && !z; i++) {
-			if(arrayClient.get(i).getIDC() == id){
-				msg = arrayClient.get(i).searchPetC(n);
+			if(clientExists(id)!=null){
+				msg = clientExists(id).searchPetC(n);
 			}
 		}
 		return msg;
@@ -154,15 +179,18 @@ public class Vet {
 	 * This method searches if a client exists
 	 * <b>pre: </b> The array of clients must've been created
 	 * @param id : the id of the client
-	 * @return boolean variable
+	 * @return object Client
 	 */
-	public boolean clientExists(int id) {
+	public Client clientExists(int id) {
 		boolean y = false;
+		Client c = null;
 		for(int i = 0; i<arrayClient.size() && !y; i++) {
+			Client aux = (Client)arrayClient.get(i);
 			if(arrayClient.get(i).getIDC()==id) 
+				c = aux;
 				y = true;
 		}
-		return y;
+		return c;
 	}
 	
 	/**
@@ -175,8 +203,8 @@ public class Vet {
 	public String searchClientV(int id) {
 		String msg = "";
 		for(int i = 0; i<arrayClient.size(); i++) {
-			if(clientExists(id)==true) 
-				msg = arrayClient.get(i).reportClient();
+			if(clientExists(id)!=null) 
+				msg = clientExists(id).reportClient();
 		}	
 		return msg;
 	}
@@ -258,9 +286,9 @@ public class Vet {
 	public String updateClientV(int id, int p, String dir){
 		String msg = "";
 		for(int i = 0; i<arrayClient.size(); i++) {
-			if(clientExists(id)) {
-				arrayClient.get(i).setPhoneC(p);
-				arrayClient.get(i).setDirC(dir);
+			if(clientExists(id)!=null) {
+				clientExists(id).setPhoneC(p);
+				clientExists(id).setDirC(dir);
 				msg = "Information succesfully updated";
 			}
 		}
