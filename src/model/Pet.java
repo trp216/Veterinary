@@ -18,6 +18,7 @@ public class Pet {
 	/**
 	 * Pet
 	 * Pet constructor
+	 * <b>post: </b> an object pet is created.
 	 * @param n : name of the pet
 	 * @param a : age of the pet
 	 * @param w : weight of the pet

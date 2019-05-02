@@ -1,25 +1,27 @@
 package model;
+import java.util.ArrayList;
 
+/**
+ * Class ClinicHistory
+ * @author Alejandra Diaz
+ *
+ */
 public class ClinicHistory {
 
-	private String id;
+	private int id;
 	
 	private Pet clinicHistoryPet;
 	private Client clinicHistoryClient;
-	private Detail detailCH;
+	private ArrayList<Detail> detailCH;
 	
-	public ClinicHistory(Pet p, Client c, Detail d) {
+	public ClinicHistory(Pet p, Client c) {
 		clinicHistoryPet = p;
 		clinicHistoryClient = c;
-		detailCH = d;
+		detailCH = new ArrayList<Detail>();
 	}
 	
-	public Detail getDetailCH() {
+	public ArrayList getDetailCH() {
 		return detailCH;
-	}
-
-	public void setDetailCH(Detail detailCH) {
-		this.detailCH = detailCH;
 	}
 
 	public  Pet getPetCH() {
@@ -38,16 +40,24 @@ public class ClinicHistory {
 		this.clinicHistoryClient = clinicHistoryClient;
 	}
 	
-	public String getIDCH() {
+	public int getIDCH() {
 		return id;
 	}
 
-	public void setIDCH(String id) {
+	public void setIDCH(int id) {
 		this.id = id;
+	}
+	
+	public String detailsReport() {
+		String msg = "";
+		for(int i = 0; i<detailCH.size(); i++) {
+			msg += detailCH.get(i).showDetail() + "\n";
+		}
+		return msg;
 	}
 
 	public String reportCH() {
-		String msg = getClientCH().reportClient() + "\n" + getPetCH().reportPet() + "\n" + getDetailCH().showDetail();
+		String msg = "id of the clinic history: " + getIDCH() + "\n" + getClientCH().reportClient() + "\n" + getPetCH().reportPet() + "\n" + detailsReport();
 		return msg;
 	}
 }

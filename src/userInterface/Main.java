@@ -91,12 +91,10 @@ public class Main {
 	public String showClinicHistoryM() {
 		Scanner show = new Scanner(System.in);
 		
-		System.out.println("Enter the id of the owner of the pet");
+		System.out.println("Enter the id of the clinic history");
 		int id = show.nextInt();
-		System.out.println("Enter the name of the pet");
-		String np = show.next();
 		
-		String msg = theVeterinary.showClinicHistoryV(id, np);
+		String msg = theVeterinary.showClinicHistoryV(id);
 		return msg;
 	}
 	
@@ -241,6 +239,9 @@ public class Main {
 		
 		System.out.println("	New Clinic History");
 		
+		System.out.println("Enter the identification number of the clinic history");
+		int idch = newHistory.nextInt();
+		
 		System.out.println("Enter the name of the pet: ");
 		String nameNP = newPet.next();
 		
@@ -285,9 +286,8 @@ public class Main {
 		System.out.println("Enter the diagnosis of the pet:");
 		String diaNP = newHistory.next();
 		
-		Detail petDetailCH = new Detail(symNP, diaNP, registerDatePet);
 		
-		String message = theVeterinary.newClinicHistoryV(nameNP, ageNP, weightNP, typeNP, heightNP, petDetailCH, nameNC, idNC, dirNC, phoneNC);
+		String message = theVeterinary.newClinicHistoryV(idch, symNP, diaNP, registerDatePet, nameNP, ageNP, weightNP, typeNP, heightNP, nameNC, idNC, dirNC, phoneNC);
 		return message;
 	}
 	

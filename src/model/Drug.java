@@ -15,6 +15,7 @@ public class Drug {
 	private double frequency;
 	
 	/**
+	 * Drug
 	 * Drug constructor
 	 * Creates an object drug
 	 * <b>post:</b> an object drug is created

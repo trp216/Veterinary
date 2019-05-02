@@ -1,31 +1,72 @@
 package model;
 
+/**
+ * 
+ * Class Room
+ * @author Alejandra Diaz
+ *
+ */
+
 public class Room {
+	
 	
 	private int number;
 	private Pet petx;
-
+	
+	/**
+	 * Room
+	 * Room constructor
+	 * Creates an object room
+	 * <b>post: </b> a new room is created
+	 * @param n : number of the room
+	 * @param p : pet 
+	 */
 	public Room(int n, Pet p) {
 		number = n;
 		petx = p;
 	}
 
+	/**
+	 * getNumber
+	 * getNumber no-argument method returns number of the room
+	 * @return number
+	 */
 	public int getNumber() {
 		return number;
 	}
 
+	/**
+	 * setNumber
+	 * changes the number of the room for the new one entered by parameters
+	 * @param number : new number
+	 */
 	public void setNumber(int number) {
 		this.number = number;
 	}
 
+	/**
+	 * getPetX
+	 * getPetX no-argument method returns the pet in the room
+	 * @return pet
+	 */
 	public Pet getPetX() {
 		return petx;
 	}
 	
+	/**
+	 * setPetX
+	 * changes the pet in the room for the new one entered by parameters
+	 * @param petx : new pet
+	 */
 	public void setPetX(Pet petx) {
 		this.petx = petx;
 	}
 	
+	/**
+	 * stateR
+	 * This method gives the state of the room
+	 * @return the state of the room
+	 */
 	public boolean stateR() {
 		boolean x = false;
 		if(getPetX() == null)
@@ -33,6 +74,13 @@ public class Room {
 		return x;
 	}
 	
+	/**
+	 * hospitalizationCostR
+	 * This method calculates the cost o the hospitalization
+	 * @param en : entry date
+	 * @param ex : exit date
+	 * @return the cost of the hospitalization
+	 */
 	public String hospitalizationCostR(Date en, Date ex) {
 		String msg = "";
 		boolean v = false;

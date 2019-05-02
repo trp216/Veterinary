@@ -12,6 +12,7 @@ public class Date {
 	int year;
 	
 	/**
+	 * Date
 	 * Date constructor
 	 * Creates an object date
 	 * <b>post:</b> a date is created

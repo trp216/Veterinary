@@ -14,6 +14,14 @@ public class Vet {
 	private ArrayList <ClinicHistory> arrayClinicHistories;
 	private ArrayList <Client> arrayClient;
 	
+	
+	/**
+	 * Vet constructor
+	 * <b>post: </b>randomPet, randomRoom, randomClient, randomDate, randomDetail and randomCH are created. ArrayClient, arrayRoom 
+ and arrayClinicHistories are initialized. RandomClient is assigned to arrayClient. RandomPet is assigned to randomRoom. RandomRoom is assigned to position 2 on arrayRoom.
+ RandomDate is assigned to randomDetail. RandomDetail is assigned to randomCH. RandomCH is assigned to arrayClinicHistories.
+	 * @param n : name
+	 */
 	public Vet(String n) {
 		name = n;
 		Pet randomPet = new Pet("Pet", 5, 15.5, 'C', 25);
@@ -104,7 +112,16 @@ public class Vet {
 		return msg;
 	}
 	
-		public String hospitalizationV(String n, int id) {
+	/**
+	 * hospitalizationV
+	 * This method assigns a pet to a room
+	 * <b> pre: </b> the array of rooms must've been created
+	 * <b> post: </b> the pet is assigned to the room
+	 * @param n : name of the pet
+	 * @param id : identification of the client
+	 * @return message notifying the success of the method
+	 */
+	public String hospitalizationV(String n, int id) {
 		String msg = "Error";
 		boolean v = false;
 		
@@ -124,6 +141,17 @@ public class Vet {
 		return msg;
 	}
 	
+	/**
+	 * hospitalizationCost
+	 * This method calculates the cost of the hospitalization
+	 * 
+	 * @param en : entry date
+	 * @param ex : exit date
+	 * @param n : name of the pet
+	 * @param id : identification of the client
+	 * @param drug : drugs prescribed to the pet
+	 * @return message indicating the cost of the hospitalization
+	 */
 	public String hospitalizationCost(Date en, Date ex, String n, int id, Drug drug) {
 		boolean f = false;
 		String msg = "";
@@ -142,6 +170,15 @@ public class Vet {
 		return msg;
 	}
 	
+	/**
+	 * changeStateCV
+	 * This method changes the state of the client
+	 * <b> pre: </b> array of clients must exist.
+	 * <b>post: </b> the state of the client is actualized
+	 * @param id : identification of the client
+	 * @param s : state to which you want to change
+	 * @return message notifying the succes of the method
+	 */
 	public String changeStateCV(int id, char s) {
 		String msg = "";
 		boolean w = false;
@@ -209,14 +246,60 @@ public class Vet {
 		return msg;
 	}
 	
-	public String newClinicHistoryV(String nameNP, double ageNP, double weightNP, char typeNP, double heightNP, Detail d, String n, int id, String dir, int ph) {
+	/**
+	 * searchClinicHistory
+	 * This method searches for a clinic history
+	 * <b>pre: </b> The array of clinic histories must've been created
+	 * @param id : identification number of the clinic history
+	 * @return clinic history
+	 */
+	public ClinicHistory searchClinicHistory(int id) {
+		boolean v = false;
+		ClinicHistory ch = null;
+		for(int i = 0; i<arrayClinicHistories.size() && !v;i++) {
+			ClinicHistory aux = (ClinicHistory)arrayClinicHistories.get(i);
+			if(arrayClinicHistories.get(i).getIDCH()==id) {
+					ch = aux;
+					v = true;
+			}
+		}
+		return ch;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean addSymptoms() {}
+	
+	/**
+	 * addDetailV
+	 * This method adds a new detail to a clinic history
+	 * @param id : identification number of the clinic history 
+	 * @param s : symptoms
+	 * @param d : diagnosis
+	 * @param cd : consult date
+	 * @return
+	 */
+	public boolean addDetailV(int id, String s, String d, Date cd) {
+		Detail dt = new Detail(s,d,cd);
+		boolean x = false;
+		if(searchClinicHistory(id)!=null) {
+			searchClinicHistory(id).getDetailCH().add(dt);
+			x = true;
+		}
+		return x;
+	}
+	
+	public String newClinicHistoryV(int idch, String symNP,String diaNP, Date registerDatePet, String nameNP, double ageNP, double weightNP, char typeNP, double heightNP, String n, int id, String dir, int ph) {
 		String msg = "Error";
 		Client clientCH = new Client(n, id, dir, ph);
 		Pet newPet = new Pet(nameNP, ageNP, weightNP, typeNP, heightNP);
 		boolean x = false;
 		for(int i = 0;i<arrayClinicHistories.size() && !x;i++){
 			if(clientCH.getIDC() != (arrayClinicHistories.get(i).getClientCH().getIDC())) {
-				arrayClinicHistories.add(new ClinicHistory(newPet, clientCH, d));
+				arrayClinicHistories.add(new ClinicHistory(newPet, clientCH));
+				addDetailV(idch, symNP, diaNP, registerDatePet);
 				arrayClient.add(clientCH);
 				arrayClient.get(i).addPetC(nameNP, ageNP, weightNP, typeNP, heightNP);
 				msg = "Clinic History added";
@@ -224,7 +307,8 @@ public class Vet {
 			}
 			else if(clientCH.getIDC() == (arrayClinicHistories.get(i).getClientCH().getIDC())) {
 				if(newPet.getNameP() != (arrayClinicHistories.get(i).getPetCH().getNameP())) {
-					arrayClinicHistories.add(new ClinicHistory(newPet, clientCH, d));	
+					arrayClinicHistories.add(new ClinicHistory(newPet, clientCH));	
+					addDetailV(idch, symNP, diaNP, registerDatePet);
 					arrayClient.add(clientCH);
 					arrayClient.get(i).addPetC(nameNP, ageNP, weightNP, typeNP, heightNP);
 					msg = "Clinic history added";
@@ -235,17 +319,14 @@ public class Vet {
 		return msg;
 	}
 	
-	public String showClinicHistoryV(int id, String np) {
-		boolean h = false;
-		String msg = "";
-		for(int i = 0; i<arrayClinicHistories.size() && !h; i++) {
-			if(arrayClinicHistories.get(i).getClientCH().getIDC() == id) {
-				if(arrayClinicHistories.get(i).getPetCH().getNameP().equalsIgnoreCase(np)) {
-					msg = arrayClinicHistories.get(i).reportCH();
-					h = true;
-				}
-			}
-		}
+	/**
+	 * showClinicHistoryV 
+	 * This method shows a clinic history
+	 * @param id : identification of the client
+	 * @return message showing the clinic history
+	 */
+	public String showClinicHistoryV(int id) {
+		String msg = searchClinicHistory(id).reportCH();
 		return msg;
 	}
 	

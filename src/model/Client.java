@@ -20,13 +20,14 @@ public class Client {
 	private ArrayList <Pet> arrayPet;
 	
 	/**
-	 * 
+	 * Client
+	 * Client constructor
+	 * <b>post: </b> an object client is created
 	 * @param n : name
 	 * @param i : identification
 	 * @param d : direction
 	 * @param p : phone number
-	 * state of the client is setted to active
-	 * arrayPet : arraylist of pets is initialized
+	 * <b>post: </b>state of the client is settled to active. Arraylist of pets is initialized
 	 */
 	
 	public Client(String n, int i, String d, int p) {
