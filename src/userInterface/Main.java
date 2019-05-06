@@ -53,7 +53,8 @@ public class Main {
 			System.out.println("11- Add new details to a clinic history\n");
 			System.out.println("12- Add new symptoms to a clinic history\n");
 			System.out.println("13- Add new drug to an hospitalized pet\n");
-			System.out.println("14- Exit");
+			System.out.println("14- Calculate the body mass index of a pet\n");
+			System.out.println("15- Exit");
 			int entry = x.nextInt();
 			switch(entry){
 				case 1: 
@@ -107,6 +108,10 @@ public class Main {
 					System.out.println(msg);
 					break;
 				case 14:
+					msg = massIndexM();
+					System.out.println(msg);
+					break;
+				case 15:
 					msg = "angalia hivi karibuni";
 					System.out.println(msg);
 					end = false;
@@ -117,6 +122,24 @@ public class Main {
 			}
 		}
 		
+	}
+	
+	/**
+	 * massIndexM
+	 * This method shows the body mass index of a pet
+	 * @return message showing the body mass index of the pet
+	 */
+	public String massIndexM() {
+		Scanner pet = new Scanner(System.in);
+		
+		System.out.println("Enter the name of the pet");
+		String n = pet.next();
+		
+		System.out.println("Enter the id of its owner");
+		int id = pet.nextInt();
+		
+		String msg = theVeterinary.massIndexV(id, n);
+		return msg;
 	}
 	
 	/**

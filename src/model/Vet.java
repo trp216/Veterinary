@@ -42,6 +42,22 @@ public class Vet {
 		randomCH.addDetailCH(randomDetail);
 		arrayClinicHistories.add(randomCH);
 	}
+	
+	/**
+	 * massIndexV
+	 * This method shows the body mass index of the pet
+	 * <b>pre:</b>array of client must exist and must have an array of pets
+	 * @param id identification of the client
+	 * @param n name of the pet
+	 * @return message showing the body mass index of the pet
+	 */
+	public String massIndexV(int id, String n) {
+		String msg = "";
+		if(clientExists(id)!=null && clientExists(id).getPet(n)!=null) {
+			msg = "Body mass index: " + clientExists(id).getPet(n).bodyMassIndex();
+		}
+		return msg;
+	}
 
 /**
  * addDrugV
