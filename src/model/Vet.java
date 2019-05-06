@@ -17,17 +17,20 @@ public class Vet {
 	
 	/**
 	 * Vet constructor
-	 * <b>post: </b>randomPet, randomRoom, randomClient, randomDate, randomDetail and randomCH are created. ArrayClient, arrayRoom 
- and arrayClinicHistories are initialized. RandomClient is assigned to arrayClient. RandomPet is assigned to randomRoom. RandomRoom is assigned to position 2 on arrayRoom.
+	 * <b>post: </b>randomPet, randomRoom, randomClient, randomDate, randomDrug, randomDetail and randomCH are created. ArrayClient, arrayDrug, arrayRoom 
+ and arrayClinicHistories are initialized. RandomClient is assigned to arrayClient. RandomPet and randomDrug are assigned to randomRoom. RandomRoom is assigned to position 2 on arrayRoom.
  RandomDate is assigned to randomDetail. RandomDetail is assigned to randomCH. RandomCH is assigned to arrayClinicHistories.
 	 * @param n : name
 	 */
 	public Vet(String n) {
 		name = n;
 		Pet randomPet = new Pet("Pet", 5, 15.5, 'C', 25);
+		Drug randomDrug = new Drug("Random drug", 150, 2, 2000);
 		arrayRoom = new Room [8];
 		Room randomRoom = new Room(2, randomPet);
+		randomRoom.getArrayDrug().add(randomDrug);
 		arrayRoom[2] = randomRoom;
+		arrayRoom[2].getArrayDrug().add(randomDrug);
 		arrayClinicHistories = new ArrayList <ClinicHistory>();
 		arrayClient = new ArrayList <Client>();
 		Client randomClient = new Client("Client", 567, "Random direction", 238642);
@@ -38,6 +41,32 @@ public class Vet {
 		ClinicHistory randomCH = new ClinicHistory(00, randomPet, randomClient);
 		randomCH.addDetailCH(randomDetail);
 		arrayClinicHistories.add(randomCH);
+	}
+
+/**
+ * addDrugV
+ * This method adds a new drug
+ * <b>pre:</b>Array of rooms mmust've been created. 
+ * <b>post:</b>A new drug is added 
+ * @param nm name of the drug
+ * @param dm dose of the drug
+ * @param cm cost of the dose 
+ * @param fm frequency of the drug
+ * @param np name of the pet
+ * @return boolean variable
+ */
+	public boolean addDrugV(String nm, double dm, double cm, double fm, String np){
+		boolean x = false;
+		boolean y = false;
+		Drug d = new Drug(nm, dm, fm, cm);
+			for(int i = 0; i<arrayRoom.length && !x; i++) {
+				if(arrayRoom[i].getPetX().getNameP().equals(np)) {
+					arrayRoom[i].addDrugR(d);
+					y = arrayRoom[i].addDrugR(d);
+					x = true;
+				}
+		}
+		return y;
 	}
 
 	/**
@@ -101,7 +130,6 @@ public class Vet {
 	 * @param np : name of the pet
 	 * @return message confirming that the pet has been erased
 	 */
-	
 	public String erasePetV(int nc, String np) {
 		String msg = "";
 		boolean k = false;
@@ -274,7 +302,6 @@ public class Vet {
 	 * @param s : new symptoms
 	 */
 	public void addSymptomsV(int id, String s) {
-		boolean h = false;
 		if(searchClinicHistory(id)!= null) {
 			searchClinicHistory(id).addSymptomsCH(s);
 		}
@@ -299,6 +326,26 @@ public class Vet {
 		return x;
 	}
 	
+	/**
+	 * newClinicHistoryV
+	 * This method adds a clinic history
+	 * <b>pre:</b>the arraylist of clinic histories must've been created
+	 * <b>post:</b>a new clinic history is added
+	 * @param idch id of the clinic history
+	 * @param symNP symptoms of the pet
+	 * @param diaNP diagnosis of the pet
+	 * @param registerDatePet date of the register of the pet
+	 * @param nameNP name of the pet
+	 * @param ageNP age of the pet
+	 * @param weightNP weight of the pet
+	 * @param typeNP type of the pet
+	 * @param heightNP height of the pet
+	 * @param n name of the client
+	 * @param id id of the client
+	 * @param dir direction of the client
+	 * @param ph phone number of the client
+	 * @return message showing the success of the method
+	 */
 	public String newClinicHistoryV(int idch, String symNP,String diaNP, Date registerDatePet, String nameNP, double ageNP, double weightNP, char typeNP, double heightNP, String n, int id, String dir, int ph) {
 		String msg = "Error";
 		Client clientCH = new Client(n, id, dir, ph);

@@ -30,6 +30,7 @@ public class ClinicHistory {
 		detailCH = new ArrayList<Detail>();
 	}
 	
+	
 	/**
 	 * getDetailCH
 	 * getDetailCH no-argument method returns arraylist of details
@@ -93,22 +94,40 @@ public class ClinicHistory {
 		this.id = id;
 	}
 	
+	/**
+	 * addDetailCH
+	 * This method add a new detail to the array of details
+	 * <b>pre: </b>Array of details must've been created
+	 * <b>post: </b>A new detail is added to the array of details
+	 * @param d new detail that's going to be added
+	 * @return boolean variable
+	 */
 	public boolean addDetailCH(Detail d) {
 		boolean x = false;
-		boolean a = getDetailCH().add(d);
+		boolean a = detailCH.add(d);
 		if(a == true)
 			x = true;
 		return x;
 	}
 	
+	/**
+	*addSymptomsCH
+	*This method allows to add a new symptom presented during the hospitalization at the patient stories.
+	*<b>pre:</b> The patient clinic story must not be null.
+	*<b>post:</b> A new symptom is added to the patient clinic story.
+	*@param s The new symptom presented
+	*/
 	public void addSymptomsCH(String s) {
 		Detail objDet=detailCH.get(detailCH.size()-1);
-		String aux=	objDet.getSymptoms();
-		aux += ("\n" + "New symptoms: " + s);
-		objDet.setSymptoms(aux);
-		
+		objDet.newSymptoms(s);
 	}
 	
+	/**
+	 * detailsReport
+	 * This method shows a report of all the details of a clinic history
+	 * <b>pre:</b>Arraylist of details must've been created
+	 * @return a message with all the details of a clinic history
+	 */
 	public String detailsReport() {
 		String msg = "";
 		for(int i = 0; i<detailCH.size(); i++) {
@@ -117,8 +136,13 @@ public class ClinicHistory {
 		return msg;
 	}
 
+	/*
+	 * reportCH
+	 * This method shows a report of the clinic history
+	 * @return a message with the report of the clinic history
+	 */
 	public String reportCH() {
-		String msg = "id of the clinic history: " + getIDCH() + "\n" + getClientCH().reportClient() + "\n" + getPetCH().reportPet() + "\n" + detailsReport();
+		String msg = "id of the clinic history: " + getIDCH() + "\n" + "Client: " + getClientCH().reportClient() + "\n" + "Pet: " + getPetCH().reportPet() + "\n" + detailsReport();
 		return msg;
 	}
 }

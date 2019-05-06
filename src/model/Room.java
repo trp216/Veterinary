@@ -1,5 +1,5 @@
 package model;
-
+import java.util.ArrayList;
 /**
  * 
  * Class Room
@@ -13,6 +13,8 @@ public class Room {
 	private int number;
 	private Pet petx;
 	
+	private ArrayList<Drug> arrayDrug;
+	
 	/**
 	 * Room
 	 * Room constructor
@@ -24,6 +26,29 @@ public class Room {
 	public Room(int n, Pet p) {
 		number = n;
 		petx = p;
+		arrayDrug = new ArrayList<Drug>();
+	}
+
+	/**
+	 * getArrayDrug
+	 * getArrayDrug no-argument method returns array of drugs
+	 * @return array of drugs
+	 */
+	public ArrayList<Drug> getArrayDrug() {
+		return arrayDrug;
+	}
+	
+	/**
+	 * 
+	 * @param d drug that's going to be added
+	 * @return boolean variable
+	 */
+	public boolean addDrugR(Drug d) {
+		boolean x = false;
+		arrayDrug.add(d);
+		if(arrayDrug.add(d)==true)
+			x = true;
+		return x;
 	}
 
 	/**
@@ -83,8 +108,6 @@ public class Room {
 	 */
 	public String hospitalizationCostR(Date en, Date ex) {
 		String msg = "";
-		boolean v = false;
-		int c = 0;
 		int m = ex.getMonth() - en.getMonth();
 		int z = (m-2) * 30;
 		int h = 12 - en.getMonth();

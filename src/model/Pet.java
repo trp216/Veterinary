@@ -156,7 +156,7 @@ public class Pet {
 	 */
 	
 	public String reportPet() { //report method for Pet
-		String msg = getNameP() + ", type: " + getTypeP() + ", weight: " + getWeightP() + ", height: " + getHeight() + ", age " + getAgeP();
+		String msg = "Name: " + getNameP() + ", type: " + getTypeP() + ", weight: " + getWeightP() + ", height: " + getHeight() + ", age " + getAgeP();
 		return msg;
 	}
 

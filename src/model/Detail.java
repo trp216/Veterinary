@@ -1,5 +1,4 @@
 package model;
-import java.util.ArrayList;
 
 /**
  *Class Detail
@@ -121,6 +120,11 @@ public class Detail {
 		this.consultDate = consultDate;
 	}
 	
+	public String newSymptoms(String s) {
+		symptoms+=". New symptoms: "+s;		
+		return symptoms;
+	}
+	
 	/**
 	 * showDetail
 	 * Method that shows a message with all the details of the clinic history
@@ -128,7 +132,7 @@ public class Detail {
 	 */
 
 	public String showDetail() { //report method for Detail
-		String msg = "Symptoms: " + getSymptoms() + ", Diagnosis: " + getDiagnosis() + ", state: " + getStateCH();
+		String msg = "Symptoms: " + symptoms + ", Diagnosis: " + getDiagnosis() + ", state: " + getStateCH();
 		return msg;
 	}
 }

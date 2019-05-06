@@ -1,22 +1,39 @@
 package userInterface;
 import java.util.Scanner;
-
 import model.*;
+/**
+ * Class Main
+ * @author Alejandra Diaz
+ *@see model.Vet
+ */
 
 public class Main {
-	private String message;
 	private Vet theVeterinary;
 
+	/**
+	 * Main
+	 * Main constructor
+	 * <b>post</b> A veterinary is created.
+	 */
 	public Main() {
 		theVeterinary = new Vet("The Veterinary");
 	}
 
+	/**
+	 * main
+	 * This method show the menu and creates a main
+	 * @param args args
+	 */
 	public static void main(String[] args) {
 		Main objMain = new Main();
 		System.out.println("	Welcome to My Little Pet\n");
 		objMain.menu();
 	}
 	
+	/**
+	 * menu
+	 * This method is a navigation menu
+	 */
 	public void menu() {
 		Scanner x = new Scanner(System.in);
 		boolean end = true;
@@ -35,7 +52,8 @@ public class Main {
 			System.out.println("10- Update client information\n");
 			System.out.println("11- Add new details to a clinic history\n");
 			System.out.println("12- Add new symptoms to a clinic history\n");
-			System.out.println("13- Exit");
+			System.out.println("13- Add new drug to an hospitalized pet\n");
+			System.out.println("14- Exit");
 			int entry = x.nextInt();
 			switch(entry){
 				case 1: 
@@ -85,6 +103,10 @@ public class Main {
 					addSymptomsM();
 					break;
 				case 13:
+					msg = addDrugs();
+					System.out.println(msg);
+					break;
+				case 14:
 					msg = "angalia hivi karibuni";
 					System.out.println(msg);
 					end = false;
@@ -97,6 +119,44 @@ public class Main {
 		
 	}
 	
+	/**
+	 * addDrugs 
+	 * <b>post:</b>A new drug is added
+	 * This method adds a drug to an hospitalized pet
+	 * @return message showing the success of the method
+	 */
+	public String addDrugs() {
+		String msg = "";
+		Scanner drug = new Scanner(System.in);
+		
+		System.out.println("Enter the name of the medicine:");
+		String nm = drug.next();
+		
+		System.out.println("Enter the dose of the medicine:");
+		double dm = drug.nextDouble();
+		
+		System.out.println("Enter the cost of the dose:");
+		double cm = drug.nextDouble();
+		
+		System.out.println("Enter the frequency of the medicine application:");
+		double fm = drug.nextDouble();
+		
+		System.out.println("Enter the name of the pet that's hospitalized:");
+		String np  = drug.next();
+		
+		theVeterinary.addDrugV(nm, dm, cm, fm, np);
+		if(theVeterinary.addDrugV(nm, dm, cm, fm, np)==true)
+			msg = "Drug added";
+		else
+			msg = "Error";
+		return msg;
+	}
+	
+	/**
+	 * showClinicHistoryM
+	 * This method shows a report of clinic history
+	 * @return report of a clinic history
+	 */
 	public String showClinicHistoryM() {
 		Scanner show = new Scanner(System.in);
 		
@@ -107,6 +167,12 @@ public class Main {
 		return msg;
 	}
 	
+	/**
+	 * addDetailM
+	 * <b>post:</b>New details are added to a clinic history
+	 * This method adds new details to a clinic history
+	 * @return message showing the success of the method
+	 */
 	public String addDetailM() {
 		Scanner d = new Scanner(System.in);
 		String msg = "";
@@ -139,6 +205,11 @@ public class Main {
 		return msg;
 	}
 	
+	/**
+	 * addSymptomsM
+	 * <b>post:</b>New symptoms are added to a clinic history
+	 * This method adds new symptoms to a clinic history
+	 */
 	public void addSymptomsM() {
 		Scanner s = new Scanner(System.in);
 		String msg = "";
@@ -152,6 +223,11 @@ public class Main {
 		theVeterinary.addSymptomsV(id, sy);
 	}
 	
+	/**
+	 * addPetM
+	 * This method a pet to the database of the vet
+	 * <b>post:</b>A new pet is added
+	 */
 	public void addPetM() {
 		Scanner add = new Scanner(System.in);
 		System.out.println("Enter the name of the pet: ");
@@ -184,6 +260,11 @@ public class Main {
 		theVeterinary.addPetV(nnp, anp, wnp, tnp, hnp, nnc, idnc, dirnc, pnc);
 	}
 	
+	/**
+	 * erasePetV
+	 * Method that erases a pet
+	 * @return message confirming that the pet has been erased
+	 */
 	public String erasePet() {
 		Scanner erase  = new Scanner(System.in);
 		
@@ -196,6 +277,12 @@ public class Main {
 		return msg;
 	}
 	
+	/**
+	 * changeStateM
+	 * <b>post:</b>The state of the client is changed
+	 * This method changes the state of client
+	 * @return message showing the success of the method
+	 */
 	public String changeStateCM() {
 		Scanner state = new Scanner(System.in);
 		
@@ -208,6 +295,11 @@ public class Main {
 		return msg;
 	}
 
+	/**
+	 * searchPetM
+	 * This method shows the report of a pet
+	 * @return message with the information of the pet
+	 */
 	public String searchPetM() {
 		Scanner searchPet = new Scanner(System.in);
 		
@@ -219,6 +311,11 @@ public class Main {
 		return msg;
 	}
 	
+	/**
+	 * searchClientM
+	 * This method shows the report of a client
+	 * @return message with the information of the client
+	 */
 	public String searchClientM() {
 		Scanner searchClient = new Scanner(System.in);
 		System.out.println("Enter the identification of the client");
@@ -227,6 +324,12 @@ public class Main {
 		return msg;
 	}
 	
+	/**
+	 * newHospitalizationM
+	 * This method hospitalizes a pet
+	 * <b>post:</b>A pet is hospitalized 
+	 * @return a message showing the success of the method and, if the client wants it, the cost of the hospitalization
+	 */
 	public String newHospitalizationM() {
 		Scanner newPetH = new Scanner(System.in);
 		Scanner newRoomNumber = new Scanner(System.in);	
@@ -286,6 +389,12 @@ public class Main {
 		
 	}
 	
+	/**
+	 * newClinicHistoryM
+	 * This method adds a new clinic history
+	 * <b>post:</b> a new clinic history is added
+	 * @return message showing the success of the method
+	 */
 	public String newClinicHistoryM() { //method to create a clinic history 
 		Scanner newPet = new Scanner(System.in);
 		Scanner newClient = new Scanner(System.in);
@@ -345,6 +454,11 @@ public class Main {
 		return message;
 	}
 	
+	/**
+	 * busyRoom
+	 * This method confirms if a room is busy
+	 * @return mmessage confirming if a room is busy
+	 */
 	public String busyRoom() {
 		Scanner busy = new Scanner(System.in);
 		
@@ -355,6 +469,11 @@ public class Main {
 		return message;
 	}
 	
+	/**
+	 * updateClient
+	 * This method updates the information of a client
+	 * @return message confirming that the information is updated
+	 */
 	public String updateClient() {
 		Scanner update = new Scanner(System.in);
 		

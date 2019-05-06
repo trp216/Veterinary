@@ -188,7 +188,7 @@ public class Client {
 	 */
 
 	public String reportClient() {
-		String msg = getNameC() + ", id: " + getIDC() + ", phone: " + getPhoneC() + ", direction: " + getDirC() + ", state: " + getStateC();
+		String msg = "Name: " + getNameC() + ", id: " + getIDC() + ", phone: " + getPhoneC() + ", direction: " + getDirC() + ", state: " + getStateC();
 		return msg;
 	}
 	
