@@ -54,7 +54,9 @@ public class Main {
 			System.out.println("12- Add new symptoms to a clinic history\n");
 			System.out.println("13- Add new drug to an hospitalized pet\n");
 			System.out.println("14- Calculate the body mass index of a pet\n");
-			System.out.println("15- Exit");
+			System.out.println("15- Add new service\n");
+			System.out.println("16- Information about services\n");
+			System.out.println("17- Exit");
 			int entry = x.nextInt();
 			switch(entry){
 				case 1: 
@@ -112,6 +114,13 @@ public class Main {
 					System.out.println(msg);
 					break;
 				case 15:
+					msg = addServiceM();
+					System.out.println(msg);
+					break;
+				case 16:
+					serviceInfoM();
+					break;
+				case 17:
 					msg = "angalia hivi karibuni";
 					System.out.println(msg);
 					end = false;
@@ -122,6 +131,42 @@ public class Main {
 			}
 		}
 		
+	}
+	
+	/**
+	 * serviceInfoM
+	 * This method shows the total and the average incomes by services
+	 */
+	public void serviceInfoM() {
+		System.out.println("The total incomes by services is " + theVeterinary.serviceIncomesV());
+		System.out.println("The average incomes by services is " + theVeterinary.averageIncomesServiceV());
+	}
+	
+	/**
+	 * addServiceM
+	 * This method adds a new service
+	 * <b>post:</b>New service is added
+	 * @return message showing the success of the method
+	 */
+	public String addServiceM() {
+		Scanner s = new Scanner(System.in);
+		
+		System.out.println("Enter the type of the service: \nB for bath on veterinary\nD for bath at home\nM for manicure\nP for dental prophylaxis\nV for vaccines");
+		char t = s.next().charAt(0);
+		
+		System.out.println("Enter the day");
+		int day = s.nextInt();
+		
+		System.out.println("Enter the month");
+		int month = s.nextInt();
+		
+		System.out.println("Enter the year");
+		int year = s.nextInt();
+		
+		Date d = new Date(day, month, year);
+		
+		String msg = theVeterinary.addServiceV(t, d);
+		return msg;
 	}
 	
 	/**

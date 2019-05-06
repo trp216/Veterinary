@@ -13,11 +13,12 @@ public class Vet {
 	private Room[] arrayRoom;
 	private ArrayList <ClinicHistory> arrayClinicHistories;
 	private ArrayList <Client> arrayClient;
+	private ArrayList <Service> arrayService;
 	
 	
 	/**
 	 * Vet constructor
-	 * <b>post: </b>randomPet, randomRoom, randomClient, randomDate, randomDrug, randomDetail and randomCH are created. ArrayClient, arrayDrug, arrayRoom 
+	 * <b>post: </b>randomPet, randomRoom, randomClient, randomDate, randomDrug, randomDetail and randomCH are created. ArrayClient, arrayDrug, arrayService, arrayRoom 
  and arrayClinicHistories are initialized. RandomClient is assigned to arrayClient. RandomPet and randomDrug are assigned to randomRoom. RandomRoom is assigned to position 2 on arrayRoom.
  RandomDate is assigned to randomDetail. RandomDetail is assigned to randomCH. RandomCH is assigned to arrayClinicHistories.
 	 * @param n : name
@@ -27,6 +28,7 @@ public class Vet {
 		Pet randomPet = new Pet("Pet", 5, 15.5, 'C', 25);
 		Drug randomDrug = new Drug("Random drug", 150, 2, 2000);
 		arrayRoom = new Room [8];
+		arrayService = new ArrayList<Service>();
 		Room randomRoom = new Room(2, randomPet);
 		randomRoom.getArrayDrug().add(randomDrug);
 		arrayRoom[2] = randomRoom;
@@ -43,6 +45,60 @@ public class Vet {
 		arrayClinicHistories.add(randomCH);
 	}
 	
+	/**
+	 * getArrayService
+	 * This method returns the array of services
+	 * @return array of services
+	 */
+	public ArrayList<Service> getArrayService() {
+		return arrayService;
+	}
+	
+	/**
+	 * serviceIncomes
+	 * This method calculates the service incomes
+	 * <b>pre:</b>array of services must've been created
+	 * @return total service incomes
+	 */
+	public int serviceIncomesV() {
+		int x = 0;
+		for(int i = 0;i<arrayService.size();i++) {
+			x += arrayService.get(i).getCost();
+		}
+		return x;
+	}
+	
+	/**
+	 * averageIncomesServiceV
+	 * This method calculates the average incomes for services
+	 * <b>pre:</b>array of services must've been created
+	 * @return average incomes for services
+	 */
+	public double averageIncomesServiceV() {
+		int y = serviceIncomesV()/(arrayService.size()-1);
+		return y;
+	}
+	
+	/**
+	 * addService
+	 * This method adds a new service
+	 * <b>pre:</b>array of services must've been created
+	 * <b>post:</b>a new service is added
+	 * @param t type of service
+	 * @param d date when the service is made
+	 * @return message showing the success of the method
+	 */
+	public String addServiceV(char t, Date d) {
+		String msg = "";
+		Service e = new Service(t,d);
+		arrayService.add(e);
+		if(arrayService.add(e)==true)
+			msg = "Service added";
+		else
+			msg = "Error";
+		return msg;
+	}
+
 	/**
 	 * massIndexV
 	 * This method shows the body mass index of the pet
